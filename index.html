@@ -1,1846 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ENTER THE MTI UNIVERSE | displayMRKTNG</title>
-<meta name="description" content="MTI Universe — Enter the grid. Find The Vault.">
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-
-<style>
-  /* ─── TOKENS ──────────────────────────────── */
-  :root {
-    --void:    #000000;
-    --ash:     #0a0a0a;
-    --smoke:   #111111;
-    --wire:    #1e1e1e;
-    --dim:     #2a2a2a;
-    --mist:    #444444;
-    --ghost:   #888888;
-    --chalk:   #cccccc;
-    --white:   #f5f5f5;
-    --volt:    #d4ff00;   /* primary accent — The Vault */
-    --ember:   #ff4d00;   /* secondary accent */
-    --ice:     #00d4ff;   /* tertiary */
-    --font-display: 'Bebas Neue', sans-serif;
-    --font-mono:    'Space Mono', monospace;
-    --font-body:    'Syne', sans-serif;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--void);
-    color: var(--white);
-    font-family: var(--font-body);
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: crosshair;
-  }
-
-  /* ─── NOISE OVERLAY ───────────────────────── */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* ─── HEADER ──────────────────────────────── */
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2.5rem;
-    border-bottom: 1px solid var(--wire);
-    position: relative;
-    z-index: 10;
-  }
-
-  .wordmark {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    letter-spacing: 0.3em;
-    color: var(--volt);
-    text-decoration: none;
-    cursor: crosshair;
-  }
-
-  .header-tag {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: var(--mist);
-    text-transform: uppercase;
-  }
-
-  /* ─── HERO ────────────────────────────────── */
-  .hero {
-    padding: 3.5rem 2.5rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.4em;
-    color: var(--ember);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    animation: fadeUp 0.6s ease both;
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3.5rem, 10vw, 8rem);
-    line-height: 0.9;
-    letter-spacing: 0.02em;
-    color: var(--white);
-    text-transform: uppercase;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
-
-  .hero-title span {
-    color: var(--volt);
-    display: block;
-  }
-
-  .hero-sub {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    color: var(--ghost);
-    margin-top: 1.2rem;
-    max-width: 480px;
-    line-height: 1.8;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  /* ─── SESSION ID TICKER ───────────────────── */
-  .session-ticker {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--dim);
-    letter-spacing: 0.15em;
-    margin-top: 1rem;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  /* ─── GRID ────────────────────────────────── */
-  .grid-section {
-    padding: 2rem 2.5rem 4rem;
-  }
-
-  /* VARIANT A — default */
-  .grid-a {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    gap: 1px;
-    background: var(--wire);
-  }
-
-  /* VARIANT B — vault-forward funnel */
-  .grid-b {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1px;
-    background: var(--wire);
-  }
-
-  /* ─── CARD ────────────────────────────────── */
-  .card {
-    background: var(--ash);
-    padding: 2rem 1.8rem;
-    cursor: crosshair;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.2s ease;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 200px;
-    animation: fadeIn 0.5s ease both;
-  }
-
-  .card:nth-child(1) { animation-delay: 0.05s; }
-  .card:nth-child(2) { animation-delay: 0.10s; }
-  .card:nth-child(3) { animation-delay: 0.15s; }
-  .card:nth-child(4) { animation-delay: 0.20s; }
-  .card:nth-child(5) { animation-delay: 0.25s; }
-  .card:nth-child(6) { animation-delay: 0.30s; }
-  .card:nth-child(7) { animation-delay: 0.35s; }
-  .card:nth-child(8) { animation-delay: 0.40s; }
-  .card:nth-child(9) { animation-delay: 0.45s; }
-
-  .card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 1px;
-    background: transparent;
-    transition: background 0.2s ease;
-  }
-
-  .card:hover {
-    background: var(--smoke);
-  }
-
-  .card:hover::after {
-    background: var(--volt);
-  }
-
-  /* THE VAULT — hero card */
-  .card.vault {
-    background: var(--smoke);
-    border: 1px solid var(--volt);
-  }
-
-  .card.vault:hover {
-    background: #0f0f00;
-  }
-
-  .card.vault .card-label {
-    color: var(--volt);
-  }
-
-  /* Variant B: vault spans full height of col 1 */
-  .grid-b .card.vault {
-    grid-row: 1 / 3;
-    min-height: 420px;
-    justify-content: flex-end;
-  }
-
-  .card-index {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--dim);
-    letter-spacing: 0.2em;
-    margin-bottom: auto;
-  }
-
-  .card.vault .card-index {
-    color: var(--mist);
-  }
-
-  .card-label {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-    line-height: 1;
-    letter-spacing: 0.04em;
-    color: var(--white);
-    text-transform: uppercase;
-    margin-top: 2rem;
-    transition: color 0.2s;
-  }
-
-  .card:hover .card-label {
-    color: var(--volt);
-  }
-
-  .card.vault:hover .card-label {
-    color: var(--volt);
-  }
-
-  .card-desc {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--mist);
-    letter-spacing: 0.12em;
-    line-height: 1.7;
-    margin-top: 0.6rem;
-    text-transform: uppercase;
-  }
-
-  .card-arrow {
-    font-size: 0.9rem;
-    margin-top: 1.2rem;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    color: var(--volt);
-    font-family: var(--font-mono);
-  }
-
-  .card:hover .card-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-
-  /* Vault CTA badge */
-  .vault-badge {
-    display: inline-block;
-    background: var(--volt);
-    color: var(--void);
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.2em;
-    padding: 0.3rem 0.6rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    font-weight: 700;
-  }
-
-  /* Click pulse */
-  .card.clicked::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: var(--volt);
-    opacity: 0.04;
-    animation: pulse 0.4s ease;
-    pointer-events: none;
-  }
-
-  /* ─── FOOTER ──────────────────────────────── */
-  footer {
-    border-top: 1px solid var(--wire);
-    padding: 1.5rem 2.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-copy {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--dim);
-    letter-spacing: 0.15em;
-  }
-
-  .footer-status {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    color: var(--volt);
-    letter-spacing: 0.15em;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .status-dot {
-    width: 6px; height: 6px;
-    background: var(--volt);
-    border-radius: 50%;
-    animation: blink 2s infinite;
-  }
-
-  /* ─── LEAD CAPTURE MODAL ──────────────────── */
-  .modal-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.88);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .modal {
-    background: var(--ash);
-    border: 1px solid var(--wire);
-    border-top: 2px solid var(--volt);
-    width: min(520px, 92vw);
-    padding: 3rem 2.5rem 2.5rem;
-    position: relative;
-    transform: translateY(20px);
-    transition: transform 0.35s ease;
-  }
-
-  .modal-overlay.active .modal {
-    transform: translateY(0);
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 1rem; right: 1.2rem;
-    background: none;
-    border: none;
-    color: var(--mist);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    cursor: crosshair;
-    letter-spacing: 0.2em;
-    transition: color 0.2s;
-    padding: 0.25rem 0.5rem;
-  }
-
-  .modal-close:hover { color: var(--white); }
-
-  .modal-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.55rem;
-    letter-spacing: 0.35em;
-    color: var(--volt);
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-  }
-
-  .modal-title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    line-height: 0.95;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 0.8rem;
-  }
-
-  .modal-title span { color: var(--volt); }
-
-  .modal-body {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--ghost);
-    line-height: 1.9;
-    letter-spacing: 0.08em;
-    margin-bottom: 2rem;
-    max-width: 380px;
-  }
-
-  .modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .modal-input {
-    background: var(--void);
-    border: 1px solid var(--wire);
-    color: var(--white);
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    padding: 0.9rem 1rem;
-    outline: none;
-    width: 100%;
-    transition: border-color 0.2s;
-  }
-
-  .modal-input::placeholder { color: var(--dim); }
-
-  .modal-input:focus {
-    border-color: var(--volt);
-  }
-
-  .modal-submit {
-    background: var(--volt);
-    color: var(--void);
-    border: none;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    letter-spacing: 0.15em;
-    padding: 0.9rem 1.5rem;
-    cursor: crosshair;
-    text-transform: uppercase;
-    transition: background 0.2s, transform 0.1s;
-    margin-top: 0.25rem;
-  }
-
-  .modal-submit:hover { background: #e8ff33; }
-  .modal-submit:active { transform: scale(0.98); }
-
-  .modal-disclaimer {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    color: var(--dim);
-    letter-spacing: 0.1em;
-    text-align: center;
-    margin-top: 1rem;
-    line-height: 1.8;
-  }
-
-  /* Success state */
-  .modal-success {
-    display: none;
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  .modal-success.show { display: block; }
-  .modal-form.hide { display: none; }
-
-  .success-code {
-    font-family: var(--font-display);
-    font-size: 3rem;
-    color: var(--volt);
-    letter-spacing: 0.2em;
-    margin: 1rem 0;
-  }
-
-  .success-label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: var(--ghost);
-    letter-spacing: 0.2em;
-    line-height: 2;
-  }
-
-  /* ─── A/B BADGE ───────────────────────────── */
-  .variant-badge {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    color: var(--ember);
-    letter-spacing: 0.2em;
-    border: 1px solid var(--ember);
-    padding: 0.15rem 0.4rem;
-    opacity: 0.4;
-  }
-
-  /* ─── ANIMATIONS ──────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  @keyframes pulse {
-    from { opacity: 0.08; }
-    to   { opacity: 0; }
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.2; }
-  }
-
-  /* ─── RESPONSIVE ──────────────────────────── */
-  @media (max-width: 768px) {
-    header { padding: 1rem 1.2rem; }
-    .hero  { padding: 2.5rem 1.2rem 1.5rem; }
-    .grid-section { padding: 1.5rem 1.2rem 3rem; }
-
-    .grid-a,
-    .grid-b {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto;
-    }
-
-    .grid-b .card.vault {
-      grid-column: 1 / 3;
-      grid-row: auto;
-      min-height: 240px;
-    }
-
-    footer { padding: 1rem 1.2rem; }
-  }
-
-  @media (max-width: 480px) {
-    .grid-a,
-    .grid-b {
-      grid-template-columns: 1fr;
-    }
-
-    .grid-b .card.vault {
-      grid-column: 1;
-    }
-
-    .modal { padding: 2.5rem 1.5rem 2rem; }
-  }
-
-  /* ─── GEMINI NAVIGATOR ────────────────────── */
-  .nav-overlay {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.92);
-    z-index: 1100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    backdrop-filter: blur(6px);
-  }
-
-  .nav-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .nav-panel {
-    width: min(580px, 94vw);
-    background: var(--ash);
-    border: 1px solid var(--wire);
-    border-top: 2px solid var(--ice);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    max-height: 80vh;
-    transform: translateY(16px);
-    transition: transform 0.35s ease;
-  }
-
-  .nav-overlay.active .nav-panel {
-    transform: translateY(0);
-  }
-
-  .nav-header {
-    padding: 1.5rem 2rem 1.2rem;
-    border-bottom: 1px solid var(--wire);
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-shrink: 0;
-  }
-
-  .nav-header-text {}
-
-  .nav-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.5rem;
-    letter-spacing: 0.35em;
-    color: var(--ice);
-    text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-
-  .nav-title {
-    font-family: var(--font-display);
-    font-size: 1.6rem;
-    letter-spacing: 0.06em;
-    color: var(--white);
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .nav-close {
-    background: none;
-    border: none;
-    color: var(--mist);
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    cursor: crosshair;
-    letter-spacing: 0.2em;
-    padding: 0.2rem 0.4rem;
-    flex-shrink: 0;
-    transition: color 0.2s;
-  }
-
-  .nav-close:hover { color: var(--white); }
-
-  .nav-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1.5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    scroll-behavior: smooth;
-  }
-
-  .nav-messages::-webkit-scrollbar { width: 2px; }
-  .nav-messages::-webkit-scrollbar-track { background: transparent; }
-  .nav-messages::-webkit-scrollbar-thumb { background: var(--wire); }
-
-  .msg {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    animation: fadeUp 0.3s ease both;
-  }
-
-  .msg-label {
-    font-family: var(--font-mono);
-    font-size: 0.48rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-  }
-
-  .msg.system .msg-label { color: var(--ice); }
-  .msg.user   .msg-label { color: var(--volt); align-self: flex-end; }
-
-  .msg-bubble {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    line-height: 1.85;
-    letter-spacing: 0.06em;
-    padding: 0.85rem 1rem;
-    max-width: 88%;
-  }
-
-  .msg.system .msg-bubble {
-    background: var(--smoke);
-    border-left: 2px solid var(--ice);
-    color: var(--chalk);
-  }
-
-  .msg.user .msg-bubble {
-    background: #0f0f02;
-    border-right: 2px solid var(--volt);
-    color: var(--white);
-    align-self: flex-end;
-    text-align: right;
-  }
-
-  /* Node recommendation chip */
-  .node-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: var(--void);
-    border: 1px solid var(--volt);
-    color: var(--volt);
-    font-family: var(--font-display);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    padding: 0.4rem 0.8rem;
-    cursor: crosshair;
-    margin-top: 0.6rem;
-    transition: background 0.2s, color 0.2s;
-    text-decoration: none;
-  }
-
-  .node-chip:hover {
-    background: var(--volt);
-    color: var(--void);
-  }
-
-  /* Typing indicator */
-  .typing-indicator {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 0.7rem 1rem;
-    background: var(--smoke);
-    border-left: 2px solid var(--ice);
-    width: fit-content;
-  }
-
-  .typing-dot {
-    width: 4px; height: 4px;
-    background: var(--ice);
-    border-radius: 50%;
-    animation: typingBounce 1.2s infinite ease-in-out;
-  }
-
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes typingBounce {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30%            { transform: translateY(-5px); opacity: 1; }
-  }
-
-  .nav-input-row {
-    padding: 1rem 2rem 1.5rem;
-    border-top: 1px solid var(--wire);
-    display: flex;
-    gap: 0.6rem;
-    flex-shrink: 0;
-  }
-
-  .nav-input {
-    flex: 1;
-    background: var(--void);
-    border: 1px solid var(--wire);
-    color: var(--white);
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    padding: 0.7rem 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .nav-input::placeholder { color: var(--dim); }
-  .nav-input:focus { border-color: var(--ice); }
-
-  .nav-send {
-    background: var(--ice);
-    color: var(--void);
-    border: none;
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    letter-spacing: 0.15em;
-    padding: 0.7rem 1.2rem;
-    cursor: crosshair;
-    flex-shrink: 0;
-    transition: background 0.2s, opacity 0.2s;
-  }
-
-  .nav-send:hover { background: #33ddff; }
-  .nav-send:disabled { opacity: 0.35; cursor: not-allowed; }
-
-  /* ─── WEATHER CANVAS ──────────────────────── */
-  #weatherCanvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 2s ease;
-  }
-
-  #weatherCanvas.visible { opacity: 1; }
-
-  /* Weather state label — subtle, bottom left */
-  #weatherLabel {
-    position: fixed;
-    bottom: 1.2rem;
-    left: 2.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.48rem;
-    letter-spacing: 0.25em;
-    color: var(--dim);
-    text-transform: uppercase;
-    z-index: 10;
-    pointer-events: none;
-    transition: opacity 1s ease;
-  }
-
-  /* Ensure all content sits above canvas */
-  header, section, footer,
-  .modal-overlay, .nav-overlay { position: relative; z-index: 1; }
-</style>
-</head>
-<body>
-
-<!-- ─── WEATHER CANVAS ──────────────────────────────── -->
-<canvas id="weatherCanvas"></canvas>
-<div id="weatherLabel"></div>
-
-<!-- ─── HEADER ─────────────────────────────────────── -->
-<header>
-  <a href="/" class="wordmark">MTI UNIVERSE</a>
-  <div style="display:flex; align-items:center; gap:1.5rem;">
-    <span class="header-tag">displayMRKTNG</span>
-    <span class="variant-badge" id="variantBadge"></span>
-  </div>
-</header>
-
-<!-- ─── HERO ───────────────────────────────────────── -->
-<section class="hero">
-  <p class="hero-kicker">// TRANSMISSION ACTIVE — SELECT YOUR NODE</p>
-  <h1 class="hero-title">ENTER<span>THE MTI</span>UNIVERSE</h1>
-  <p class="hero-sub">Nine nodes. One vault. The architecture is not neutral — the path forward is already encoded. Navigate with intent.</p>
-  <p class="session-ticker" id="sessionTicker">SESSION — —</p>
-</section>
-
-<!-- ─── GRID ───────────────────────────────────────── -->
-<section class="grid-section">
-  <div class="grid-a" id="mainGrid">
-
-    <!-- CARD 01 — THE VAULT (hero, always first) -->
-    <a href="#" class="card vault" data-node="THE_VAULT" data-url="#">
-      <div>
-        <span class="card-index">01 / PRIMARY NODE</span>
-        <div class="vault-badge">◈ RESTRICTED ACCESS</div>
-      </div>
-      <div>
-        <div class="card-label">THE VAULT</div>
-        <div class="card-desc">Core archive. Unreleased material.<br>Members only.</div>
-        <div class="card-arrow">→ ENTER</div>
-      </div>
-    </a>
-
-    <!-- CARD 02 -->
-    <a href="#" class="card" data-node="MTI_RADIO" data-url="#">
-      <span class="card-index">02 / AUDIO</span>
-      <div>
-        <div class="card-label">MTI RADIO</div>
-        <div class="card-desc">Live sessions.<br>Frequency drops.</div>
-        <div class="card-arrow">→ TUNE IN</div>
-      </div>
-    </a>
-
-    <!-- CARD 03 -->
-    <a href="#" class="card" data-node="AKATA_VISIONS" data-url="#">
-      <span class="card-index">03 / VISUAL</span>
-      <div>
-        <div class="card-label">AKATA VISIONS</div>
-        <div class="card-desc">Direction. Film. Identity.<br>Moving image.</div>
-        <div class="card-arrow">→ VIEW</div>
-      </div>
-    </a>
-
-    <!-- CARD 04 -->
-    <a href="#" class="card" data-node="SUBSTACK" data-url="#">
-      <span class="card-index">04 / EDITORIAL</span>
-      <div>
-        <div class="card-label">SUBSTACK</div>
-        <div class="card-desc">Long-form intelligence.<br>The dispatch.</div>
-        <div class="card-arrow">→ READ</div>
-      </div>
-    </a>
-
-    <!-- CARD 05 -->
-    <a href="#" class="card" data-node="MRKTNG_LAB" data-url="#">
-      <span class="card-index">05 / STRATEGY</span>
-      <div>
-        <div class="card-label">MRKTNG LAB</div>
-        <div class="card-desc">Infrastructure. Growth.<br>System architecture.</div>
-        <div class="card-arrow">→ BUILD</div>
-      </div>
-    </a>
-
-    <!-- CARD 06 -->
-    <a href="#" class="card" data-node="ARCHIVE" data-url="#">
-      <span class="card-index">06 / CATALOG</span>
-      <div>
-        <div class="card-label">ARCHIVE</div>
-        <div class="card-desc">The full body of work.<br>Indexed. Permanent.</div>
-        <div class="card-arrow">→ EXPLORE</div>
-      </div>
-    </a>
-
-    <!-- CARD 07 -->
-    <a href="#" class="card" data-node="LIVE" data-url="#">
-      <span class="card-index">07 / EVENTS</span>
-      <div>
-        <div class="card-label">LIVE</div>
-        <div class="card-desc">Appearances. Shows.<br>Presence.</div>
-        <div class="card-arrow">→ UPCOMING</div>
-      </div>
-    </a>
-
-    <!-- CARD 08 -->
-    <a href="#" class="card" data-node="COLLECTIVE" data-url="#">
-      <span class="card-index">08 / NETWORK</span>
-      <div>
-        <div class="card-label">COLLECTIVE</div>
-        <div class="card-desc">The network.<br>The operators.</div>
-        <div class="card-arrow">→ CONNECT</div>
-      </div>
-    </a>
-
-    <!-- CARD 09 -->
-    <a href="#" class="card" data-node="SHOP" data-url="#">
-      <span class="card-index">09 / OBJECTS</span>
-      <div>
-        <div class="card-label">SHOP</div>
-        <div class="card-desc">Physical artifacts.<br>Limited editions.</div>
-        <div class="card-arrow">→ ACQUIRE</div>
-      </div>
-    </a>
-
-  </div><!-- /#mainGrid -->
-</section>
-
-<!-- ─── FOOTER ─────────────────────────────────────── -->
-<footer>
-  <span class="footer-copy">© MTI UNIVERSE — DISPLAYMRKTNG — ALL TRANSMISSIONS MONITORED</span>
-  <span class="footer-status">
-    <span class="status-dot"></span>
-    LIVE
-  </span>
-</footer>
-
-<!-- ─── LEAD CAPTURE MODAL ─────────────────────────── -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" aria-label="Close">✕ CLOSE</button>
-
-    <p class="modal-eyebrow">// RESTRICTED CHANNEL OPEN</p>
-    <h2 class="modal-title" id="modalTitle">UNLOCK<span><br>THE VAULT</span></h2>
-    <p class="modal-body">
-      First access. Unreleased audio. The full archive.<br>
-      One email. Zero noise. Drop in — get the code before this closes.
-    </p>
-
-    <div class="modal-form" id="modalForm">
-      <input
-        type="email"
-        class="modal-input"
-        id="emailInput"
-        placeholder="YOUR EMAIL ADDRESS"
-        autocomplete="email"
-        required
-      />
-      <input
-        type="tel"
-        class="modal-input"
-        id="smsInput"
-        placeholder="SMS (OPTIONAL — EARLY DROPS)"
-        autocomplete="tel"
-      />
-      <button class="modal-submit" id="modalSubmit">SEND ME THE CODE</button>
-      <p class="modal-disclaimer">
-        No spam. No noise. Unsubscribe any time.<br>
-        Your data stays inside the MTI ecosystem.
-      </p>
-    </div>
-
-    <div class="modal-success" id="modalSuccess">
-      <p class="success-label">YOUR VAULT ACCESS CODE</p>
-      <div class="success-code" id="accessCode">——</div>
-      <p class="success-label">
-        CHECK YOUR EMAIL FOR FULL INSTRUCTIONS.<br>
-        THE VAULT OPENS WHEN YOU ARRIVE WITH THE CODE.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- ─── GEMINI NAVIGATOR ────────────────────────────── -->
-<div class="nav-overlay" id="navOverlay">
-  <div class="nav-panel" role="dialog" aria-modal="true" aria-label="MTI Navigator">
-
-    <div class="nav-header">
-      <div class="nav-header-text">
-        <p class="nav-eyebrow">// AI NAVIGATOR — ONLINE</p>
-        <h2 class="nav-title">MTI SIGNAL</h2>
-      </div>
-      <button class="nav-close" id="navClose">✕ CLOSE</button>
-    </div>
-
-    <div class="nav-messages" id="navMessages">
-      <!-- messages injected by JS -->
-    </div>
-
-    <div class="nav-input-row">
-      <input
-        type="text"
-        class="nav-input"
-        id="navInput"
-        placeholder="WHAT ARE YOU LOOKING FOR..."
-        autocomplete="off"
-        maxlength="200"
-      />
-      <button class="nav-send" id="navSend">→ SEND</button>
-    </div>
-
-  </div>
-</div>
-<script>
-(function() {
-
-  /* ── ENVIRONMENTAL SENSORY SHIFT ────────────────── */
-  (function initTimeState() {
-    const hour = new Date().getHours();
-    const root = document.documentElement;
-
-    if (hour >= 5 && hour < 12) {
-      root.style.setProperty('--void', '#080a0f'); // Morning: Deep cool ambient
-    } else if (hour >= 12 && hour < 18) {
-      root.style.setProperty('--void', '#0a0a0a'); // Day: Standard ash
-    } else if (hour >= 18 && hour < 22) {
-      root.style.setProperty('--void', '#120804'); // Evening: Subtle ember tint
-    } else {
-      root.style.setProperty('--void', '#000000'); // Night: Absolute void
-    }
-  })();
-
-  /* ── WEATHER BACKGROUND ENGINE ───────────────────── */
-  (function initWeather() {
-    const canvas  = document.getElementById('weatherCanvas');
-    const label   = document.getElementById('weatherLabel');
-    const ctx     = canvas.getContext('2d');
-
-    // ── CONFIG — paste your OpenWeatherMap key here when ready ──
-    const OWM_KEY = 'YOUR_OWM_KEY'; // get free at openweathermap.org/api
-
-    let W = 0, H = 0;
-    let particles = [];
-    let animFrame = null;
-    let currentState = null;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', () => { resize(); buildParticles(currentState); });
-
-    /* ── WEATHER STATES ─────────────────────────────── */
-    const STATES = {
-      CLEAR_DAY: {
-        label: '◎ CLEAR',
-        bg: 'transparent',
-        build(n) {
-          // Slow drifting light motes
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W, y: Math.random() * H,
-            r: Math.random() * 1.5 + 0.3,
-            vx: (Math.random() - 0.5) * 0.15,
-            vy: -Math.random() * 0.2 - 0.05,
-            alpha: Math.random() * 0.18 + 0.04,
-            color: `rgba(255,210,120,`
-          });
-        },
-        draw() {
-          particles.forEach(p => {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.color + p.alpha + ')';
-            ctx.fill();
-            p.x += p.vx; p.y += p.vy;
-            if (p.y < -5) { p.y = H + 5; p.x = Math.random() * W; }
-          });
-          // Subtle warm vignette glow top-center
-          const g = ctx.createRadialGradient(W/2, 0, 0, W/2, 0, H * 0.6);
-          g.addColorStop(0, 'rgba(255,180,60,0.04)');
-          g.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, W, H);
-        }
-      },
-
-      CLEAR_NIGHT: {
-        label: '★ CLEAR NIGHT',
-        bg: 'transparent',
-        build(n) {
-          // Stars — varied sizes and twinkle speeds
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W, y: Math.random() * H * 0.85,
-            r: Math.random() * 1.2 + 0.2,
-            baseAlpha: Math.random() * 0.6 + 0.2,
-            alpha: 0,
-            twinkleSpeed: Math.random() * 0.015 + 0.003,
-            twinkleOffset: Math.random() * Math.PI * 2,
-            color: Math.random() > 0.85 ? 'rgba(180,220,255,' : 'rgba(255,255,255,'
-          });
-        },
-        draw() {
-          const t = Date.now() / 1000;
-          particles.forEach(p => {
-            p.alpha = p.baseAlpha * (0.5 + 0.5 * Math.sin(t * p.twinkleSpeed * 60 + p.twinkleOffset));
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.color + p.alpha + ')';
-            ctx.fill();
-          });
-          // Occasional shooting star
-          if (Math.random() < 0.0008) spawnShootingStar();
-          drawShootingStars();
-        }
-      },
-
-      CLOUDY: {
-        label: '◌ OVERCAST',
-        bg: 'transparent',
-        build(n) {
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W * 1.4 - W * 0.2,
-            y: Math.random() * H * 0.6,
-            w: Math.random() * 280 + 120,
-            h: Math.random() * 60 + 30,
-            vx: Math.random() * 0.12 + 0.03,
-            alpha: Math.random() * 0.07 + 0.02
-          });
-        },
-        draw() {
-          particles.forEach(p => {
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w / 1.5);
-            g.addColorStop(0, `rgba(140,160,180,${p.alpha})`);
-            g.addColorStop(1, 'rgba(100,120,140,0)');
-            ctx.fillStyle = g;
-            ctx.beginPath();
-            ctx.ellipse(p.x, p.y, p.w, p.h, 0, 0, Math.PI * 2);
-            ctx.fill();
-            p.x += p.vx;
-            if (p.x - p.w > W) p.x = -p.w;
-          });
-          // Cool blue-grey wash
-          const wash = ctx.createLinearGradient(0, 0, 0, H);
-          wash.addColorStop(0, 'rgba(80,100,130,0.06)');
-          wash.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = wash;
-          ctx.fillRect(0, 0, W, H);
-        }
-      },
-
-      RAIN: {
-        label: '// RAIN',
-        bg: 'transparent',
-        build(n) {
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            len: Math.random() * 14 + 8,
-            speed: Math.random() * 4 + 6,
-            alpha: Math.random() * 0.18 + 0.06
-          });
-        },
-        draw() {
-          ctx.strokeStyle = 'rgba(140,180,220,0)'; // reset
-          particles.forEach(p => {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p.x - 1, p.y + p.len);
-            ctx.strokeStyle = `rgba(140,180,220,${p.alpha})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-            p.y += p.speed;
-            if (p.y > H) { p.y = -p.len; p.x = Math.random() * W; }
-          });
-          // Dark blue wash
-          const wash = ctx.createLinearGradient(0, 0, 0, H);
-          wash.addColorStop(0, 'rgba(20,40,80,0.08)');
-          wash.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = wash;
-          ctx.fillRect(0, 0, W, H);
-        }
-      },
-
-      STORM: {
-        label: '⚡ STORM',
-        bg: 'transparent',
-        build(n) {
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            len: Math.random() * 20 + 12,
-            speed: Math.random() * 8 + 10,
-            alpha: Math.random() * 0.22 + 0.08
-          });
-        },
-        draw() {
-          particles.forEach(p => {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p.x - 2, p.y + p.len);
-            ctx.strokeStyle = `rgba(100,140,200,${p.alpha})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-            p.y += p.speed;
-            if (p.y > H) { p.y = -p.len; p.x = Math.random() * W; }
-          });
-          // Lightning flash
-          if (Math.random() < 0.003) {
-            ctx.fillStyle = 'rgba(200,220,255,0.04)';
-            ctx.fillRect(0, 0, W, H);
-          }
-          const wash = ctx.createLinearGradient(0, 0, 0, H);
-          wash.addColorStop(0, 'rgba(10,15,40,0.12)');
-          wash.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = wash;
-          ctx.fillRect(0, 0, W, H);
-        }
-      },
-
-      FOG: {
-        label: '◫ FOG',
-        bg: 'transparent',
-        build(n) {
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            w: Math.random() * 400 + 200,
-            h: Math.random() * 100 + 60,
-            vx: (Math.random() - 0.5) * 0.08,
-            vy: (Math.random() - 0.5) * 0.04,
-            alpha: Math.random() * 0.06 + 0.015,
-            pulse: Math.random() * Math.PI * 2,
-            pulseSpeed: Math.random() * 0.005 + 0.002
-          });
-        },
-        draw() {
-          const t = Date.now() / 1000;
-          particles.forEach(p => {
-            const a = p.alpha * (0.7 + 0.3 * Math.sin(t * p.pulseSpeed * 60 + p.pulse));
-            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w / 1.2);
-            g.addColorStop(0, `rgba(160,165,170,${a})`);
-            g.addColorStop(1, 'rgba(120,125,130,0)');
-            ctx.fillStyle = g;
-            ctx.beginPath();
-            ctx.ellipse(p.x, p.y, p.w, p.h, 0, 0, Math.PI * 2);
-            ctx.fill();
-            p.x += p.vx; p.y += p.vy;
-            if (p.x < -p.w) p.x = W + p.w;
-            if (p.x > W + p.w) p.x = -p.w;
-            if (p.y < -p.h) p.y = H + p.h;
-            if (p.y > H + p.h) p.y = -p.h;
-          });
-        }
-      },
-
-      SNOW: {
-        label: '* SNOW',
-        bg: 'transparent',
-        build(n) {
-          for (let i = 0; i < n; i++) particles.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 2 + 0.5,
-            vx: (Math.random() - 0.5) * 0.4,
-            vy: Math.random() * 0.8 + 0.3,
-            alpha: Math.random() * 0.5 + 0.2,
-            drift: Math.random() * Math.PI * 2,
-            driftSpeed: Math.random() * 0.01 + 0.005
-          });
-        },
-        draw() {
-          const t = Date.now() / 1000;
-          particles.forEach(p => {
-            const drift = Math.sin(t * p.driftSpeed * 60 + p.drift) * 0.4;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(220,230,255,${p.alpha})`;
-            ctx.fill();
-            p.x += p.vx + drift;
-            p.y += p.vy;
-            if (p.y > H + 5) { p.y = -5; p.x = Math.random() * W; }
-          });
-          // Cool blue tint
-          const wash = ctx.createLinearGradient(0, 0, 0, H);
-          wash.addColorStop(0, 'rgba(60,80,140,0.05)');
-          wash.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = wash;
-          ctx.fillRect(0, 0, W, H);
-        }
-      }
-    };
-
-    /* ── SHOOTING STARS (night only) ──────────────── */
-    let shootingStars = [];
-    function spawnShootingStar() {
-      shootingStars.push({
-        x: Math.random() * W * 0.7 + W * 0.1,
-        y: Math.random() * H * 0.3,
-        len: Math.random() * 120 + 60,
-        speed: Math.random() * 6 + 8,
-        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3,
-        alpha: 0.8,
-        fade: 0.025
-      });
-    }
-    function drawShootingStars() {
-      shootingStars = shootingStars.filter(s => s.alpha > 0);
-      shootingStars.forEach(s => {
-        ctx.save();
-        ctx.translate(s.x, s.y);
-        ctx.rotate(s.angle);
-        const g = ctx.createLinearGradient(-s.len, 0, 0, 0);
-        g.addColorStop(0, 'rgba(255,255,255,0)');
-        g.addColorStop(1, `rgba(255,255,255,${s.alpha})`);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(-s.len, 0);
-        ctx.lineTo(0, 0);
-        ctx.stroke();
-        ctx.restore();
-        s.x += Math.cos(s.angle) * s.speed;
-        s.y += Math.sin(s.angle) * s.speed;
-        s.alpha -= s.fade;
-      });
-    }
-
-    /* ── PARTICLE COUNT BY SCREEN ─────────────────── */
-    function particleCount(state) {
-      const base = W < 768 ? 60 : 140;
-      const counts = {
-        CLEAR_DAY: base, CLEAR_NIGHT: Math.floor(base * 2.5),
-        CLOUDY: Math.floor(base * 0.4), RAIN: Math.floor(base * 1.8),
-        STORM: Math.floor(base * 2.2), FOG: Math.floor(base * 0.3),
-        SNOW: Math.floor(base * 1.2)
-      };
-      return counts[state] || base;
-    }
-
-    function buildParticles(state) {
-      particles = [];
-      if (state && STATES[state]) {
-        STATES[state].build(particleCount(state));
-      }
-    }
-
-    /* ── ANIMATION LOOP ───────────────────────────── */
-    function loop() {
-      ctx.clearRect(0, 0, W, H);
-      if (currentState && STATES[currentState]) {
-        STATES[currentState].draw();
-      }
-      animFrame = requestAnimationFrame(loop);
-    }
-
-    /* ── APPLY STATE ──────────────────────────────── */
-    function applyState(stateKey, source) {
-      currentState = stateKey;
-      buildParticles(stateKey);
-      label.textContent = (STATES[stateKey]?.label || '') + (source ? '  ' + source : '');
-      canvas.classList.add('visible');
-      fireEvent('WEATHER_STATE', { state: stateKey, source });
-    }
-
-    /* ── TIME-OF-DAY FALLBACK ─────────────────────── */
-    function timeBasedState() {
-      const h = new Date().getHours();
-      if (h >= 5  && h < 8)  return 'CLEAR_DAY';
-      if (h >= 8  && h < 18) return 'CLEAR_DAY';
-      if (h >= 18 && h < 21) return 'CLOUDY';
-      return 'CLEAR_NIGHT';
-    }
-
-    /* ── MAP OWM CODE → STATE ─────────────────────── */
-    function owmToState(code, isDay) {
-      if (code >= 200 && code < 300) return 'STORM';
-      if (code >= 300 && code < 600) return 'RAIN';
-      if (code >= 600 && code < 700) return 'SNOW';
-      if (code >= 700 && code < 800) return 'FOG';
-      if (code === 800) return isDay ? 'CLEAR_DAY' : 'CLEAR_NIGHT';
-      if (code > 800)  return 'CLOUDY';
-      return isDay ? 'CLEAR_DAY' : 'CLEAR_NIGHT';
-    }
-
-    /* ── FETCH LIVE WEATHER ───────────────────────── */
-    function fetchWeather(lat, lon) {
-      if (!OWM_KEY || OWM_KEY === 'YOUR_OWM_KEY') {
-        applyState(timeBasedState(), '// TIME FALLBACK');
-        return;
-      }
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}`;
-      fetch(url)
-        .then(r => r.json())
-        .then(d => {
-          const code  = d?.weather?.[0]?.id || 800;
-          const h     = new Date().getHours();
-          const isDay = h >= 6 && h < 20;
-          applyState(owmToState(code, isDay), '// LIVE');
-        })
-        .catch(() => applyState(timeBasedState(), '// TIME FALLBACK'));
-    }
-
-    /* ── GEOLOCATION ──────────────────────────────── */
-    function init() {
-      loop(); // start canvas loop immediately
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
-          ()  => applyState(timeBasedState(), '// TIME FALLBACK'),
-          { timeout: 6000, maximumAge: 300000 }
-        );
-      } else {
-        applyState(timeBasedState(), '// TIME FALLBACK');
-      }
-    }
-
-    init();
-  })();
-
-
-  /* ── CONFIG ── UPDATE THESE ─────────────────────────
-     Replace with your actual CRM / webhook endpoints.
-     Supports Zapier, Make (Integromat), Airtable, ConvertKit, etc.
-  ──────────────────────────────────────────────────── */
-  const CONFIG = {
-    // Webhook for lead capture (Zapier / Make / n8n)
-    leadWebhook: 'https://hook.us2.make.com/kiep28g89j2bwvelmmolknmbbsy2d8r4',
-
-    // Webhook for behavioral event tracking
-    eventWebhook: 'https://hook.us2.make.com/kiep28g89j2bwvelmmolknmbbsy2d8r4',
-
-    // Show modal after N card clicks
-    modalAfterClicks: 2,
-
-    // A/B: force variant via URL param ?v=b
-    abParam: 'v',
-
-    // Gemini API
-    geminiKey: 'AIzaSyAmoE0OngbWlC0cNQ0SKmS_XI2VVZvkKqE',
-    geminiModel: 'gemini-1.5-flash-latest',
-  };
-
-  /* ── SESSION ID ─────────────────────────────────── */
-  function genSessionId() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let id = 'MTI-';
-    for (let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
-    return id;
-  }
-
-  const SESSION_ID = sessionStorage.getItem('mti_session') || genSessionId();
-  sessionStorage.setItem('mti_session', SESSION_ID);
-  document.getElementById('sessionTicker').textContent = 'SESSION — ' + SESSION_ID;
-  document.getElementById('variantBadge').textContent = '';
-
-  /* ── A/B VARIANT ────────────────────────────────── */
-  const urlParams = new URLSearchParams(window.location.search);
-  const variant = urlParams.get(CONFIG.abParam) || 'a';
-  const isVariantB = variant === 'b';
-
-  const grid = document.getElementById('mainGrid');
-  if (isVariantB) {
-    grid.className = 'grid-b';
-    document.getElementById('variantBadge').textContent = 'VAR:B';
-  } else {
-    document.getElementById('variantBadge').textContent = 'VAR:A';
-  }
-
-  /* ── EVENT TRACKING ─────────────────────────────── */
-  let clickCount = 0;
-  const eventLog = [];
-
-  function fireEvent(type, payload) {
-    const ev = {
-      session: SESSION_ID,
-      variant: variant,
-      type: type,
-      ts: new Date().toISOString(),
-      ...payload
-    };
-    eventLog.push(ev);
-    console.log('[MTI:TRACK]', ev);
-
-    // Fire to webhook (non-blocking, silent fail)
-    if (CONFIG.eventWebhook && !CONFIG.eventWebhook.includes('YOUR_')) {
-      fetch(CONFIG.eventWebhook, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(ev),
-        keepalive: true
-      }).catch(() => {});
-    }
-  }
-
-  // Track page load
-  fireEvent('PAGE_VIEW', {
-    referrer: document.referrer || 'direct',
-    ua: navigator.userAgent.substring(0, 80)
-  });
-
-  /* ── CARD CLICK TRACKING ────────────────────────── */
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', function(e) {
-      const node = this.dataset.node;
-      const url  = this.dataset.url;
-
-      clickCount++;
-
-      // pulse effect
-      this.classList.add('clicked');
-      setTimeout(() => this.classList.remove('clicked'), 400);
-
-      fireEvent('CARD_CLICK', { node, clickCount });
-
-      // Show modal after N clicks if not captured
-      if (clickCount >= CONFIG.modalAfterClicks && !isModalDismissed() && !isCaptured()) {
-        e.preventDefault();
-        openModal();
-        return;
-      }
-
-      // If url is real, navigate
-      if (url && url !== '#') {
-        // allow default navigation
-      } else {
-        e.preventDefault();
-      }
-    });
-  });
-
-  /* ── MODAL ──────────────────────────────────────── */
-  const overlay   = document.getElementById('modalOverlay');
-  const modalClose = document.getElementById('modalClose');
-  const modalForm  = document.getElementById('modalForm');
-  const modalSuccess = document.getElementById('modalSuccess');
-  const modalSubmit  = document.getElementById('modalSubmit');
-  const emailInput   = document.getElementById('emailInput');
-  const smsInput     = document.getElementById('smsInput');
-  const accessCodeEl = document.getElementById('accessCode');
-
-  function openModal() {
-    overlay.classList.add('active');
-    setTimeout(() => emailInput.focus(), 350);
-    fireEvent('MODAL_OPEN', {});
-  }
-
-  function closeModal() {
-    overlay.classList.remove('active');
-  }
-
-  function isCaptured() {
-    return sessionStorage.getItem('mti_captured') === '1';
-  }
-
-  function isModalDismissed() {
-    return sessionStorage.getItem('mti_dismissed') === '1';
-  }
-
-  function setModalDismissed() {
-    sessionStorage.setItem('mti_dismissed', '1');
-  }
-
-  modalClose.addEventListener('click', function() {
-    closeModal();
-    setModalDismissed();
-    fireEvent('MODAL_DISMISSED', {});
-  });
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) {
-      closeModal();
-      setModalDismissed();
-      fireEvent('MODAL_DISMISSED', {});
-    }
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && overlay.classList.contains('active')) {
-      closeModal();
-      setModalDismissed();
-    }
-  });
-
-  /* ── FORM SUBMIT ──────────────────────────────── */
-  modalSubmit.addEventListener('click', function() {
-    const email = emailInput.value.trim();
-    const sms   = smsInput.value.trim();
-
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      emailInput.focus();
-      emailInput.style.borderColor = '#ff4d00';
-      setTimeout(() => emailInput.style.borderColor = '', 1200);
-      return;
-    }
-
-    modalSubmit.textContent = 'TRANSMITTING...';
-    modalSubmit.disabled = true;
-
-    const code = 'VAULT-' + Math.random().toString(36).substring(2,6).toUpperCase();
-
-    const leadPayload = {
-      session: SESSION_ID,
-      variant: variant,
-      email: email,
-      sms: sms || null,
-      accessCode: code,
-      ts: new Date().toISOString(),
-      clickCountAtCapture: clickCount
-    };
-
-    fireEvent('LEAD_CAPTURED', leadPayload);
-
-    // Submit to lead webhook
-    const submitToWebhook = (CONFIG.leadWebhook && !CONFIG.leadWebhook.includes('YOUR_'))
-      ? fetch(CONFIG.leadWebhook, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(leadPayload),
-          keepalive: true
-        }).catch(() => {})
-      : Promise.resolve();
-
-    submitToWebhook.finally(() => {
-      sessionStorage.setItem('mti_captured', '1');
-      accessCodeEl.textContent = code;
-      modalForm.classList.add('hide');
-      modalSuccess.classList.add('show');
-
-      // Show code for 3.5s → close modal → open Gemini navigator
-      setTimeout(() => {
-        closeModal();
-        setTimeout(openNavigator, 400);
-      }, 3500);
-    });
-  });
-
-  /* ── PREFILL / PERSISTENCE ──────────────────────── */
-  // Session already captured — modal will not re-trigger
-
-  /* ── GEMINI NAVIGATOR ───────────────────────────── */
-  const NAV_SYSTEM_PROMPT = `You are the MTI Signal — the AI navigator of the MTI Universe, a creative ecosystem built by MTI (displayMRKTNG). Your role is to guide users to the node that best matches what they are looking for. Speak in a raw, direct, minimal tone. No filler. No corporate language. Short sentences. You know the nine nodes:
-
-1. THE VAULT — Core archive. Restricted access. Unreleased material, exclusive audio, members-only content. The primary destination.
-2. MTI RADIO — Live audio sessions, frequency drops, music transmissions.
-3. AKATA VISIONS — Visual direction, film, brand identity, moving image work.
-4. SUBSTACK — Long-form editorial intelligence. The dispatch. Deep thinking.
-5. MRKTNG LAB — Marketing infrastructure, growth systems, strategic architecture.
-6. ARCHIVE — The full indexed catalog of past work. Permanent record.
-7. LIVE — Appearances, shows, events, physical presence.
-8. COLLECTIVE — The network. Collaborators and operators in the ecosystem.
-9. SHOP — Physical artifacts, limited edition objects.
-
-When you identify the right node for the user, always end your response with a JSON block on its own line in this exact format:
-{"node":"NODE_NAME","label":"DISPLAY LABEL","url":"#"}
-
-Replace NODE_NAME with one of: THE_VAULT, MTI_RADIO, AKATA_VISIONS, SUBSTACK, MRKTNG_LAB, ARCHIVE, LIVE, COLLECTIVE, SHOP
-Replace DISPLAY LABEL with the node's display name.
-If the user's intent is unclear, ask one sharp clarifying question. Keep all responses under 60 words.`;
-
-  const navOverlay  = document.getElementById('navOverlay');
-  const navMessages = document.getElementById('navMessages');
-  const navInput    = document.getElementById('navInput');
-  const navSend     = document.getElementById('navSend');
-  const navClose    = document.getElementById('navClose');
-
-  let navHistory = []; // {role, parts} for Gemini multi-turn
-  let navOpen = false;
-
-  function openNavigator() {
-    navOverlay.classList.add('active');
-    navOpen = true;
-    fireEvent('NAVIGATOR_OPEN', {});
-
-    // Only greet on first open
-    if (navMessages.children.length === 0) {
-      appendNavMessage('system', 'Signal online. What are you here for?');
-    }
-
-    setTimeout(() => navInput.focus(), 350);
-  }
-
-  function closeNavigator() {
-    navOverlay.classList.remove('active');
-    navOpen = false;
-  }
-
-  navClose.addEventListener('click', closeNavigator);
-  navOverlay.addEventListener('click', e => {
-    if (e.target === navOverlay) closeNavigator();
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && navOpen) closeNavigator();
-  });
-
-  function appendNavMessage(role, text, nodeData) {
-    const msg = document.createElement('div');
-    msg.className = `msg ${role}`;
-
-    const label = document.createElement('div');
-    label.className = 'msg-label';
-    label.textContent = role === 'system' ? 'MTI SIGNAL' : 'YOU';
-
-    const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
-    bubble.textContent = text;
-
-    msg.appendChild(label);
-    msg.appendChild(bubble);
-
-    // Attach node chip if recommendation came through
-    if (nodeData) {
-      const chip = document.createElement('a');
-      chip.className = 'node-chip';
-      chip.href = nodeData.url || '#';
-      chip.textContent = '→ ' + nodeData.label;
-      chip.dataset.node = nodeData.node;
-      chip.addEventListener('click', function(e) {
-        e.preventDefault();
-        fireEvent('NAVIGATOR_NODE_CLICK', { node: nodeData.node });
-        closeNavigator();
-        // If url real, navigate — otherwise highlight the card
-        const card = document.querySelector(`[data-node="${nodeData.node}"]`);
-        if (card) {
-          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          card.classList.add('clicked');
-          setTimeout(() => card.classList.remove('clicked'), 600);
-        }
-      });
-      msg.appendChild(chip);
-    }
-
-    navMessages.appendChild(msg);
-    navMessages.scrollTop = navMessages.scrollHeight;
-    return msg;
-  }
-
-  function showTyping() {
-    const wrap = document.createElement('div');
-    wrap.className = 'msg system';
-    wrap.id = 'typingWrap';
-    const ind = document.createElement('div');
-    ind.className = 'typing-indicator';
-    ind.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-    wrap.appendChild(ind);
-    navMessages.appendChild(wrap);
-    navMessages.scrollTop = navMessages.scrollHeight;
-  }
-
-  function removeTyping() {
-    const el = document.getElementById('typingWrap');
-    if (el) el.remove();
-  }
-
-  async function sendToGemini(userText) {
-    navSend.disabled = true;
-
-    // Add user message to history and UI
-    navHistory.push({ role: 'user', parts: [{ text: userText }] });
-    appendNavMessage('user', userText);
-    showTyping();
-
-    try {
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.geminiModel}:generateContent?key=${CONFIG.geminiKey}`;
-
-      const body = {
-        system_instruction: { parts: [{ text: NAV_SYSTEM_PROMPT }] },
-        contents: navHistory,
-        generationConfig: { maxOutputTokens: 256, temperature: 0.7 }
-      };
-
-      const res  = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-
-      const data = await res.json();
-      removeTyping();
-
-      if (!res.ok) {
-        appendNavMessage('system', 'Signal disrupted. Try again.');
-        navSend.disabled = false;
-        return;
-      }
-
-      const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-
-      // Parse optional node JSON from response
-      let nodeData = null;
-      const jsonMatch = raw.match(/\{"node":\s*"([^"]+)"[^}]*"label":\s*"([^"]+)"[^}]*"url":\s*"([^"]+)"\}/);
-      if (jsonMatch) {
-        nodeData = { node: jsonMatch[1], label: jsonMatch[2], url: jsonMatch[3] };
-        fireEvent('NAVIGATOR_RECOMMENDATION', { node: nodeData.node });
-      }
-
-      // Strip the JSON block from displayed text
-      const displayText = raw.replace(/\{[^}]*"node"[^}]*\}/g, '').trim();
-
-      // Add assistant turn to history (raw, with JSON intact for context)
-      navHistory.push({ role: 'model', parts: [{ text: raw }] });
-
-      appendNavMessage('system', displayText, nodeData);
-
-    } catch (err) {
-      removeTyping();
-      appendNavMessage('system', 'Connection lost. Retry.');
-    }
-
-    navSend.disabled = false;
-    navInput.focus();
-  }
-
-  function handleNavSend() {
-    const text = navInput.value.trim();
-    if (!text) return;
-    navInput.value = '';
-    sendToGemini(text);
-  }
-
-  navSend.addEventListener('click', handleNavSend);
-  navInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleNavSend();
-  });
-
-  // ── Trigger navigator after successful lead capture ──
-  // Navigator opens automatically 3.5s after code is revealed (wired in submit flow above)
-
-})();
-</script>
-</body>
-</html>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+
+    <!-- Deep space background gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#00000f"/>
+      <stop offset="60%"  stop-color="#020208"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+
+    <!-- Volt glow for logo mark -->
+    <radialGradient id="voltGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#d4ff00" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d4ff00" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Horizon ember glow -->
+    <radialGradient id="horizonGlow" cx="50%" cy="100%" r="60%">
+      <stop offset="0%"  stop-color="#ff4d00" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Vault card glow -->
+    <radialGradient id="cardGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="#d4ff00" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Noise filter -->
+    <filter id="noise" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" result="noiseOut"/>
+      <feColorMatrix type="saturate" values="0" in="noiseOut" result="grayNoise"/>
+      <feBlend in="SourceGraphic" in2="grayNoise" mode="multiply" result="blended"/>
+      <feComposite in="blended" in2="SourceGraphic" operator="in"/>
+    </filter>
+
+    <!-- Subtle blur for glow elements -->
+    <filter id="softBlur">
+      <feGaussianBlur stdDeviation="2.5"/>
+    </filter>
+
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="0.8"/>
+    </filter>
+
+  </defs>
+
+  <!-- ── SKY BASE ─────────────────────────────────── -->
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <rect width="1200" height="630" fill="url(#horizonGlow)"/>
+
+  <!-- ── STARS ─────────────────────────────────────── -->
+  <!-- Bright stars -->
+  <g fill="white" filter="url(#starGlow)">
+    <circle cx="87"  cy="42"  r="1.4" opacity="0.9"/>
+    <circle cx="213" cy="28"  r="1.0" opacity="0.7"/>
+    <circle cx="356" cy="55"  r="1.6" opacity="0.95"/>
+    <circle cx="478" cy="19"  r="0.9" opacity="0.6"/>
+    <circle cx="534" cy="68"  r="1.3" opacity="0.85"/>
+    <circle cx="612" cy="31"  r="1.1" opacity="0.75"/>
+    <circle cx="701" cy="48"  r="1.5" opacity="0.9"/>
+    <circle cx="789" cy="22"  r="1.0" opacity="0.7"/>
+    <circle cx="843" cy="61"  r="1.8" opacity="0.95"/>
+    <circle cx="934" cy="35"  r="1.2" opacity="0.8"/>
+    <circle cx="1023" cy="52" r="1.4" opacity="0.85"/>
+    <circle cx="1098" cy="29" r="1.0" opacity="0.65"/>
+    <circle cx="1156" cy="71" r="1.6" opacity="0.9"/>
+    <circle cx="145"  cy="88"  r="0.8" opacity="0.55"/>
+    <circle cx="267"  cy="102" r="1.2" opacity="0.75"/>
+    <circle cx="412"  cy="78"  r="0.9" opacity="0.6"/>
+    <circle cx="589"  cy="95"  r="1.4" opacity="0.8"/>
+    <circle cx="668"  cy="112" r="0.7" opacity="0.5"/>
+    <circle cx="756"  cy="84"  r="1.1" opacity="0.7"/>
+    <circle cx="901"  cy="97"  r="1.3" opacity="0.75"/>
+    <circle cx="1045" cy="88"  r="0.9" opacity="0.6"/>
+    <circle cx="1134" cy="108" r="1.5" opacity="0.85"/>
+    <circle cx="52"   cy="138" r="1.0" opacity="0.65"/>
+    <circle cx="189"  cy="155" r="0.8" opacity="0.5"/>
+    <circle cx="321"  cy="127" r="1.3" opacity="0.78"/>
+    <circle cx="445"  cy="162" r="0.7" opacity="0.48"/>
+    <circle cx="567"  cy="141" r="1.1" opacity="0.7"/>
+    <circle cx="723"  cy="168" r="1.4" opacity="0.8"/>
+    <circle cx="867"  cy="133" r="0.9" opacity="0.58"/>
+    <circle cx="978"  cy="157" r="1.2" opacity="0.72"/>
+    <circle cx="1089" cy="142" r="0.8" opacity="0.52"/>
+    <circle cx="1178" cy="128" r="1.6" opacity="0.88"/>
+  </g>
+
+  <!-- Dim background stars -->
+  <g fill="white" opacity="0.3">
+    <circle cx="34"   cy="73"  r="0.6"/>
+    <circle cx="112"  cy="116" r="0.5"/>
+    <circle cx="178"  cy="61"  r="0.7"/>
+    <circle cx="234"  cy="182" r="0.5"/>
+    <circle cx="298"  cy="44"  r="0.6"/>
+    <circle cx="389"  cy="148" r="0.5"/>
+    <circle cx="467"  cy="88"  r="0.7"/>
+    <circle cx="523"  cy="174" r="0.5"/>
+    <circle cx="645"  cy="58"  r="0.6"/>
+    <circle cx="712"  cy="128" r="0.5"/>
+    <circle cx="798"  cy="176" r="0.7"/>
+    <circle cx="856"  cy="44"  r="0.5"/>
+    <circle cx="923"  cy="162" r="0.6"/>
+    <circle cx="1012" cy="78"  r="0.5"/>
+    <circle cx="1067" cy="192" r="0.7"/>
+    <circle cx="1145" cy="62"  r="0.5"/>
+    <circle cx="1189" cy="154" r="0.6"/>
+    <circle cx="66"   cy="198" r="0.5"/>
+    <circle cx="156"  cy="210" r="0.6"/>
+    <circle cx="278"  cy="224" r="0.5"/>
+    <circle cx="414"  cy="205" r="0.7"/>
+    <circle cx="512"  cy="218" r="0.5"/>
+    <circle cx="634"  cy="196" r="0.6"/>
+    <circle cx="745"  cy="212" r="0.5"/>
+    <circle cx="834"  cy="228" r="0.7"/>
+    <circle cx="956"  cy="204" r="0.5"/>
+    <circle cx="1078" cy="216" r="0.6"/>
+    <circle cx="1167" cy="198" r="0.5"/>
+  </g>
+
+  <!-- Blue-tinted stars (distant) -->
+  <g fill="#b0d0ff" opacity="0.45">
+    <circle cx="156"  cy="38"  r="1.0"/>
+    <circle cx="423"  cy="16"  r="0.8"/>
+    <circle cx="678"  cy="44"  r="1.1"/>
+    <circle cx="912"  cy="28"  r="0.9"/>
+    <circle cx="1089" cy="58"  r="1.0"/>
+    <circle cx="289"  cy="122" r="0.8"/>
+    <circle cx="812"  cy="108" r="1.0"/>
+  </g>
+
+  <!-- ── SHOOTING STAR ─────────────────────────────── -->
+  <line x1="820" y1="58" x2="920" y2="108"
+        stroke="white" stroke-width="0.8" opacity="0.6"
+        stroke-linecap="round"/>
+  <!-- fade tail -->
+  <line x1="820" y1="58" x2="860" y2="78"
+        stroke="white" stroke-width="1.4" opacity="0.25"
+        stroke-linecap="round"/>
+
+  <!-- ── VOLT GLOW CENTER ──────────────────────────── -->
+  <ellipse cx="600" cy="340" rx="380" ry="180" fill="url(#voltGlow)"/>
+
+  <!-- ── GRID LINES (background atmosphere) ───────── -->
+  <g stroke="#1a1a1a" stroke-width="0.5" opacity="0.6">
+    <!-- Vertical -->
+    <line x1="200" y1="260" x2="200" y2="590"/>
+    <line x1="400" y1="260" x2="400" y2="590"/>
+    <line x1="600" y1="260" x2="600" y2="590"/>
+    <line x1="800" y1="260" x2="800" y2="590"/>
+    <line x1="1000" y1="260" x2="1000" y2="590"/>
+    <!-- Horizontal -->
+    <line x1="160" y1="320" x2="1040" y2="320"/>
+    <line x1="160" y1="430" x2="1040" y2="430"/>
+    <line x1="160" y1="540" x2="1040" y2="540"/>
+  </g>
+
+  <!-- ── VAULT CARD (hero element) ─────────────────── -->
+  <!-- Card glow -->
+  <rect x="158" y="268" width="282" height="262" fill="url(#cardGlow)" rx="0"/>
+  <!-- Card border -->
+  <rect x="160" y="270" width="278" height="258"
+        fill="#080808" stroke="#d4ff00" stroke-width="1.2" rx="0"/>
+  <!-- Volt top bar -->
+  <rect x="160" y="270" width="278" height="2" fill="#d4ff00"/>
+
+  <!-- RESTRICTED ACCESS badge -->
+  <rect x="176" y="292" width="138" height="16" fill="#d4ff00" rx="0"/>
+  <text x="185" y="303"
+        font-family="monospace" font-size="7.5" font-weight="700"
+        fill="#000000" letter-spacing="1.5">◈ RESTRICTED ACCESS</text>
+
+  <!-- Card index -->
+  <text x="176" y="330"
+        font-family="monospace" font-size="7" fill="#444444"
+        letter-spacing="2">01 / PRIMARY NODE</text>
+
+  <!-- THE VAULT label -->
+  <text x="176" y="385"
+        font-family="Arial Black, sans-serif" font-size="36"
+        font-weight="900" fill="#d4ff00" letter-spacing="2">THE VAULT</text>
+
+  <!-- Card desc -->
+  <text x="176" y="408"
+        font-family="monospace" font-size="8" fill="#555555"
+        letter-spacing="1.5">CORE ARCHIVE. UNRELEASED MATERIAL.</text>
+  <text x="176" y="422"
+        font-family="monospace" font-size="8" fill="#555555"
+        letter-spacing="1.5">MEMBERS ONLY.</text>
+
+  <!-- Arrow -->
+  <text x="176" y="508"
+        font-family="monospace" font-size="10" fill="#d4ff00"
+        letter-spacing="2">→ ENTER</text>
+
+  <!-- ── SECONDARY CARDS (silhouette) ─────────────── -->
+  <!-- Card 02 -->
+  <rect x="442" y="270" width="196" height="120"
+        fill="#050505" stroke="#1a1a1a" stroke-width="0.8"/>
+  <text x="458" y="294" font-family="monospace" font-size="6.5"
+        fill="#2a2a2a" letter-spacing="2">02 / AUDIO</text>
+  <text x="458" y="348" font-family="Arial Black, sans-serif"
+        font-size="20" font-weight="900" fill="#1e1e1e" letter-spacing="1">MTI RADIO</text>
+
+  <!-- Card 03 -->
+  <rect x="642" y="270" width="196" height="120"
+        fill="#050505" stroke="#1a1a1a" stroke-width="0.8"/>
+  <text x="658" y="294" font-family="monospace" font-size="6.5"
+        fill="#2a2a2a" letter-spacing="2">03 / VISUAL</text>
+  <text x="658" y="340" font-family="Arial Black, sans-serif"
+        font-size="16" font-weight="900" fill="#1e1e1e" letter-spacing="1">AKATA</text>
+  <text x="658" y="360" font-family="Arial Black, sans-serif"
+        font-size="16" font-weight="900" fill="#1e1e1e" letter-spacing="1">VISIONS</text>
+
+  <!-- Card 04 -->
+  <rect x="842" y="270" width="196" height="120"
+        fill="#050505" stroke="#1a1a1a" stroke-width="0.8"/>
+  <text x="858" y="294" font-family="monospace" font-size="6.5"
+        fill="#2a2a2a" letter-spacing="2">04 / EDITORIAL</text>
+  <text x="858" y="348" font-family="Arial Black, sans-serif"
+        font-size="20" font-weight="900" fill="#1e1e1e" letter-spacing="1">SUBSTACK</text>
+
+  <!-- Bottom row cards (silhouette strip) -->
+  <rect x="442" y="394" width="596" height="108"
+        fill="#030303" stroke="#141414" stroke-width="0.8"/>
+  <text x="458" y="430" font-family="monospace" font-size="6.5"
+        fill="#1e1e1e" letter-spacing="2">05 · MRKTNG LAB</text>
+  <text x="658" y="430" font-family="monospace" font-size="6.5"
+        fill="#1e1e1e" letter-spacing="2">06 · ARCHIVE</text>
+  <text x="858" y="430" font-family="monospace" font-size="6.5"
+        fill="#1e1e1e" letter-spacing="2">07 · LIVE</text>
+  <text x="458" y="480" font-family="monospace" font-size="6.5"
+        fill="#1e1e1e" letter-spacing="2">08 · COLLECTIVE</text>
+  <text x="658" y="480" font-family="monospace" font-size="6.5"
+        fill="#1e1e1e" letter-spacing="2">09 · SHOP</text>
+
+  <!-- ── WORDMARK ───────────────────────────────────── -->
+  <text x="600" y="240"
+        font-family="Arial Black, sans-serif" font-size="28"
+        font-weight="900" fill="#f5f5f5" letter-spacing="8"
+        text-anchor="middle" opacity="0.92">MTI UNIVERSE</text>
+
+  <!-- Subline -->
+  <text x="600" y="258"
+        font-family="monospace" font-size="7.5" fill="#444444"
+        letter-spacing="4" text-anchor="middle">displayMRKTNG — ageold.shop</text>
+
+  <!-- ── NOISE LAYER ────────────────────────────────── -->
+  <rect width="1200" height="630" fill="black" opacity="0.0" filter="url(#noise)"/>
+
+  <!-- ── BOTTOM EDGE FADE ───────────────────────────── -->
+  <rect x="0" y="540" width="1200" height="90"
+        fill="url(#sky)" opacity="0.7"/>
+
+  <!-- Session dot (brand detail) -->
+  <circle cx="38" cy="608" r="3" fill="#d4ff00" opacity="0.7"/>
+  <text x="50" y="613" font-family="monospace" font-size="7"
+        fill="#333333" letter-spacing="2">TRANSMISSION ACTIVE</text>
+
+</svg>
