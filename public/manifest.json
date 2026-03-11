@@ -1,16 +1,30 @@
 {
-  "name": "ENTER THE MTI UNIVERSE",
-  "short_name": "MTI UNIVERSE",
-  "description": "The future of culture, music, and digital innovation. Transform your device into our world.",
+  "name": "MTI Universe",
+  "short_name": "MTI Universe",
+  "description": "Nine nodes. One vault. Enter the MTI Universe.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050505",
-  "theme_color": "#050505",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
