@@ -1,39 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <link rel="apple-touch-icon" href="/icon-180.png">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="icon" type="image/png" href="/icon-32.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTI Universe</title>
+    
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-180.png">
+    <link rel="icon" type="image/png" href="/icon-32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <script>
-    // Logic: window._mtiDismissed resets on every fresh page load.
-    // Logic: sessionStorage['mtiCaptured'] persists until the tab/session is closed.
-    window._mtiDismissed = false;
-    let cardClickCount = 0;
+    <script>
+        // CRM Logic: Volatile flag for page-load reset
+        window._mtiDismissed = false;
+        let interactionCount = 0;
 
-    function handleCardClick() {
-      cardClickCount++;
-      
-      const isCaptured = sessionStorage.getItem('mtiCaptured');
-      
-      // Trigger modal on 2nd click if not dismissed this load AND not already captured
-      if (cardClickCount >= 2 && !window._mtiDismissed && !isCaptured) {
-        triggerCRMMonitor();
-      }
-    }
+        function handleVaultInteraction() {
+            interactionCount++;
+            const captured = sessionStorage.getItem('mtiCaptured');
 
-    function triggerCRMMonitor() {
-      // Implementation for modal display
-      console.log("MTI Universe: Capturing Digital Outreach Lead...");
-    }
+            // Trigger on 2nd interaction if not dismissed/captured
+            if (interactionCount >= 2 && !window._mtiDismissed && !captured) {
+                showCRMModal();
+            }
+        }
 
-    function onEmailSubmit() {
-      sessionStorage.setItem('mtiCaptured', 'true');
-      // Hide modal
-    }
+        function showCRMModal() {
+            // Modal trigger logic here
+            console.log("MTI Universe: Initializing Lead Capture...");
+        }
 
-    function onModalDismiss() {
-      window._mtiDismissed = true;
-    }
-  </script>
+        function dismissModal() {
+            window._mtiDismissed = true;
+        }
+
+        function submitEmail() {
+            sessionStorage.setItem('mtiCaptured', 'true');
+        }
+    </script>
 </head>
+<body>
+    </body>
+</html>
