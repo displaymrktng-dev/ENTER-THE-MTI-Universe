@@ -1,45 +1,2470 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTI Universe</title>
-    
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/icon-180.png">
-    <link rel="icon" type="image/png" href="/icon-32.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENTER THE MTI UNIVERSE | displayMRKTNG</title>
+<meta name="description" content="Nine nodes. One vault. Enter the MTI Universe — a living creative ecosystem. The Vault is waiting.">
+<link rel="canonical" href="https://ageold.shop">
 
-    <script>
-        // CRM Logic: Volatile flag for page-load reset
-        window._mtiDismissed = false;
-        let interactionCount = 0;
+<!-- ─── OPEN GRAPH (Facebook, WhatsApp, iMessage, Discord, LinkedIn) ── -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://ageold.shop">
+<meta property="og:site_name"   content="MTI Universe">
+<meta property="og:title"       content="ENTER THE MTI UNIVERSE">
+<meta property="og:description" content="Nine nodes. One vault. A living creative ecosystem — music, vision, strategy, and the archive. The Vault is waiting.">
+<meta property="og:image"       content="https://ageold.shop/og-image.svg">
+<meta property="og:image:type"  content="image/svg+xml">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"   content="MTI Universe — stars over a dark grid. Enter the ecosystem.">
+<meta property="og:locale"      content="en_US">
 
-        function handleVaultInteraction() {
-            interactionCount++;
-            const captured = sessionStorage.getItem('mtiCaptured');
+<!-- ─── TWITTER / X CARD ──────────────────────────────────────────── -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@BE100RADIOSC">
+<meta name="twitter:creator"     content="@BE100RADIOSC">
+<meta name="twitter:title"       content="ENTER THE MTI UNIVERSE">
+<meta name="twitter:description" content="Nine nodes. One vault. A living creative ecosystem. The Vault is waiting.">
+<meta name="twitter:image"       content="https://ageold.shop/og-image.svg">
+<meta name="twitter:image:alt"   content="MTI Universe — stars over a dark grid.">
 
-            // Trigger on 2nd interaction if not dismissed/captured
-            if (interactionCount >= 2 && !window._mtiDismissed && !captured) {
-                showCRMModal();
-            }
-        }
+<!-- ─── ADDITIONAL PLATFORM META ──────────────────────────────────── -->
+<meta name="theme-color"         content="#000000">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="robots"              content="index, follow">
+<meta name="author"              content="displayMRKTNG">
+<meta name="keywords"            content="MTI Universe, displayMRKTNG, The Vault, MTI Radio, Akata Visions, music, creative ecosystem">
 
-        function showCRMModal() {
-            // Modal trigger logic here
-            console.log("MTI Universe: Initializing Lead Capture...");
-        }
+<!-- ─── FAVICON + PWA ICONS ────────────────────────────────────────── -->
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MTI Universe">
+<meta name="application-name" content="MTI Universe">
+<meta name="msapplication-TileImage" content="icon-192.png">
+<link rel="manifest" href="manifest.json">
 
-        function dismissModal() {
-            window._mtiDismissed = true;
-        }
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
-        function submitEmail() {
-            sessionStorage.setItem('mtiCaptured', 'true');
-        }
-    </script>
+<style>
+  /* ─── TOKENS ──────────────────────────────── */
+  :root {
+    --void:    #000000;
+    --ash:     #0a0a0a;
+    --smoke:   #111111;
+    --wire:    #1e1e1e;
+    --dim:     #2a2a2a;
+    --mist:    #444444;
+    --ghost:   #888888;
+    --chalk:   #cccccc;
+    --white:   #f5f5f5;
+    --volt:    #d4ff00;   /* primary accent — The Vault */
+    --ember:   #ff4d00;   /* secondary accent */
+    --ice:     #00d4ff;   /* tertiary */
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+    --font-body:    'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ─── NOISE OVERLAY ───────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── HEADER ──────────────────────────────── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--wire);
+    position: relative;
+    z-index: 10;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    color: var(--volt);
+    text-decoration: none;
+    cursor: crosshair;
+  }
+
+  .header-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--mist);
+    text-transform: uppercase;
+  }
+
+  /* ─── HERO ────────────────────────────────── */
+  .hero {
+    padding: 3.5rem 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    color: var(--ember);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    text-transform: uppercase;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-title span {
+    color: var(--volt);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--ghost);
+    margin-top: 1.2rem;
+    max-width: 480px;
+    line-height: 1.8;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  /* ─── SESSION ID TICKER ───────────────────── */
+  .session-ticker {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    margin-top: 1rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  /* ─── GRID ────────────────────────────────── */
+  .grid-section {
+    padding: 2rem 2.5rem 4rem;
+  }
+
+  /* VARIANT A — default */
+  .grid-a {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 1px;
+    background: var(--wire);
+  }
+
+  /* VARIANT B — vault-forward funnel */
+  .grid-b {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1px;
+    background: var(--wire);
+  }
+
+  /* ─── CARD ────────────────────────────────── */
+  .card {
+    background: var(--ash);
+    padding: 2rem 1.8rem;
+    cursor: crosshair;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    animation: fadeIn 0.5s ease both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.10s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.20s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.30s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+  .card:nth-child(8) { animation-delay: 0.40s; }
+  .card:nth-child(9) { animation-delay: 0.45s; }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: transparent;
+    transition: background 0.2s ease;
+  }
+
+  .card:hover {
+    background: var(--smoke);
+  }
+
+  .card:hover::after {
+    background: var(--volt);
+  }
+
+  /* THE VAULT — hero card */
+  .card.vault {
+    background: var(--smoke);
+    border: 1px solid var(--volt);
+  }
+
+  .card.vault:hover {
+    background: #0f0f00;
+  }
+
+  .card.vault .card-label {
+    color: var(--volt);
+  }
+
+  /* Variant B: vault spans full height of col 1 */
+  .grid-b .card.vault {
+    grid-row: 1 / 3;
+    min-height: 420px;
+    justify-content: flex-end;
+  }
+
+  .card-index {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--dim);
+    letter-spacing: 0.2em;
+    margin-bottom: auto;
+  }
+
+  .card.vault .card-index {
+    color: var(--mist);
+  }
+
+  .card-label {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-top: 2rem;
+    transition: color 0.2s;
+  }
+
+  .card:hover .card-label {
+    color: var(--volt);
+  }
+
+  .card.vault:hover .card-label {
+    color: var(--volt);
+  }
+
+  .card-desc {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--mist);
+    letter-spacing: 0.12em;
+    line-height: 1.7;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .card-arrow {
+    font-size: 0.9rem;
+    margin-top: 1.2rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    color: var(--volt);
+    font-family: var(--font-mono);
+  }
+
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Vault CTA badge */
+  .vault-badge {
+    display: inline-block;
+    background: var(--volt);
+    color: var(--void);
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    padding: 0.3rem 0.6rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  /* Click pulse */
+  .card.clicked::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--volt);
+    opacity: 0.04;
+    animation: pulse 0.4s ease;
+    pointer-events: none;
+  }
+
+  /* ─── FOOTER ──────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--wire);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-status {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--volt);
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    background: var(--volt);
+    border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+
+  /* ─── LEAD CAPTURE MODAL ──────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--ash);
+    border: 1px solid var(--wire);
+    border-top: 2px solid var(--volt);
+    width: min(520px, 92vw);
+    padding: 3rem 2.5rem 2.5rem;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.35s ease;
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    cursor: crosshair;
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .modal-close:hover { color: var(--white); }
+
+  .modal-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    color: var(--volt);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+  }
+
+  .modal-title span { color: var(--volt); }
+
+  .modal-body {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--ghost);
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+    max-width: 380px;
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .modal-input {
+    background: var(--void);
+    border: 1px solid var(--wire);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    padding: 0.9rem 1rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+
+  .modal-input::placeholder { color: var(--dim); }
+
+  .modal-input:focus {
+    border-color: var(--volt);
+  }
+
+  .modal-submit {
+    background: var(--volt);
+    color: var(--void);
+    border: none;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    padding: 0.9rem 1.5rem;
+    cursor: crosshair;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 0.25rem;
+  }
+
+  .modal-submit:hover { background: #e8ff33; }
+  .modal-submit:active { transform: scale(0.98); }
+
+  .modal-disclaimer {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--dim);
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-top: 1rem;
+    line-height: 1.8;
+  }
+
+  /* Success state */
+  .modal-success {
+    display: none;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .modal-success.show { display: block; }
+  .modal-form.hide { display: none; }
+
+  .success-code {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--volt);
+    letter-spacing: 0.2em;
+    margin: 1rem 0;
+  }
+
+  .success-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--ghost);
+    letter-spacing: 0.2em;
+    line-height: 2;
+  }
+
+  /* ─── A/B BADGE ───────────────────────────── */
+  .variant-badge {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    color: var(--ember);
+    letter-spacing: 0.2em;
+    border: 1px solid var(--ember);
+    padding: 0.15rem 0.4rem;
+    opacity: 0.4;
+  }
+
+  /* ─── ANIMATIONS ──────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes pulse {
+    from { opacity: 0.08; }
+    to   { opacity: 0; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  /* ─── RESPONSIVE ──────────────────────────── */
+  @media (max-width: 768px) {
+    header { padding: 1rem 1.2rem; }
+    .hero  { padding: 2.5rem 1.2rem 1.5rem; }
+    .grid-section { padding: 1.5rem 1.2rem 3rem; }
+
+    .grid-a,
+    .grid-b {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    .grid-b .card.vault {
+      grid-column: 1 / 3;
+      grid-row: auto;
+      min-height: 240px;
+    }
+
+    footer { padding: 1rem 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .grid-a,
+    .grid-b {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-b .card.vault {
+      grid-column: 1;
+    }
+
+    .modal { padding: 2.5rem 1.5rem 2rem; }
+  }
+
+  /* ─── GEMINI NAVIGATOR ────────────────────── */
+  .nav-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-panel {
+    width: min(580px, 94vw);
+    background: var(--ash);
+    border: 1px solid var(--wire);
+    border-top: 2px solid var(--ice);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+    transform: translateY(16px);
+    transition: transform 0.35s ease;
+  }
+
+  .nav-overlay.active .nav-panel {
+    transform: translateY(0);
+  }
+
+  .nav-header {
+    padding: 1.5rem 2rem 1.2rem;
+    border-bottom: 1px solid var(--wire);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .nav-header-text {}
+
+  .nav-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.35em;
+    color: var(--ice);
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .nav-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .nav-close {
+    background: none;
+    border: none;
+    color: var(--mist);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    cursor: crosshair;
+    letter-spacing: 0.2em;
+    padding: 0.2rem 0.4rem;
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+
+  .nav-close:hover { color: var(--white); }
+
+  .nav-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    scroll-behavior: smooth;
+  }
+
+  .nav-messages::-webkit-scrollbar { width: 2px; }
+  .nav-messages::-webkit-scrollbar-track { background: transparent; }
+  .nav-messages::-webkit-scrollbar-thumb { background: var(--wire); }
+
+  .msg {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  .msg-label {
+    font-family: var(--font-mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .msg.system .msg-label { color: var(--ice); }
+  .msg.user   .msg-label { color: var(--volt); align-self: flex-end; }
+
+  .msg-bubble {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    line-height: 1.85;
+    letter-spacing: 0.06em;
+    padding: 0.85rem 1rem;
+    max-width: 88%;
+  }
+
+  .msg.system .msg-bubble {
+    background: var(--smoke);
+    border-left: 2px solid var(--ice);
+    color: var(--chalk);
+  }
+
+  .msg.user .msg-bubble {
+    background: #0f0f02;
+    border-right: 2px solid var(--volt);
+    color: var(--white);
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  /* Node recommendation chip */
+  .node-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--void);
+    border: 1px solid var(--volt);
+    color: var(--volt);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    padding: 0.4rem 0.8rem;
+    cursor: crosshair;
+    margin-top: 0.6rem;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+
+  .node-chip:hover {
+    background: var(--volt);
+    color: var(--void);
+  }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0.7rem 1rem;
+    background: var(--smoke);
+    border-left: 2px solid var(--ice);
+    width: fit-content;
+  }
+
+  .typing-dot {
+    width: 4px; height: 4px;
+    background: var(--ice);
+    border-radius: 50%;
+    animation: typingBounce 1.2s infinite ease-in-out;
+  }
+
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30%            { transform: translateY(-5px); opacity: 1; }
+  }
+
+  .nav-input-row {
+    padding: 1rem 2rem 1.5rem;
+    border-top: 1px solid var(--wire);
+    display: flex;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .nav-input {
+    flex: 1;
+    background: var(--void);
+    border: 1px solid var(--wire);
+    color: var(--white);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .nav-input::placeholder { color: var(--dim); }
+  .nav-input:focus { border-color: var(--ice); }
+
+  .nav-send {
+    background: var(--ice);
+    color: var(--void);
+    border: none;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    padding: 0.7rem 1.2rem;
+    cursor: crosshair;
+    flex-shrink: 0;
+    transition: background 0.2s, opacity 0.2s;
+  }
+
+  .nav-send:hover { background: #33ddff; }
+  .nav-send:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  /* ─── WEATHER CANVAS ──────────────────────── */
+  #weatherCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 2s ease;
+  }
+
+  #weatherCanvas.visible { opacity: 1; }
+
+  /* Weather state label — subtle, bottom left */
+  #weatherLabel {
+    position: fixed;
+    bottom: 1.2rem;
+    left: 2.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.25em;
+    color: var(--dim);
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 1s ease;
+  }
+
+  /* Ensure all content sits above canvas */
+  header, section, footer,
+  .modal-overlay, .nav-overlay { position: relative; z-index: 1; }
+  /* ─── COLLECTIVE EXPAND ───────────────────── */
+  .collective-card {
+    background: var(--ash);
+    padding: 2rem 1.8rem;
+    cursor: crosshair;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    transition: background 0.2s ease, min-height 0.5s cubic-bezier(0.16,1,0.3,1);
+    animation: fadeIn 0.5s 0.40s ease both;
+  }
+
+  .collective-card:hover { background: var(--smoke); }
+
+  .collective-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: transparent;
+    transition: background 0.2s ease;
+  }
+
+  .collective-card.expanded::after { background: var(--volt); }
+
+  .collective-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: auto;
+  }
+
+  .collective-toggle {
+    width: 24px; height: 24px;
+    border: 1px solid var(--wire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: crosshair;
+    transition: border-color 0.2s, background 0.2s;
+    flex-shrink: 0;
+  }
+
+  .collective-card.expanded .collective-toggle {
+    border-color: var(--volt);
+    background: var(--volt);
+  }
+
+  .toggle-icon {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--mist);
+    line-height: 1;
+    transition: color 0.2s, transform 0.3s ease;
+    display: block;
+  }
+
+  .collective-card.expanded .toggle-icon {
+    color: var(--void);
+    transform: rotate(45deg);
+  }
+
+  .collective-summary {
+    transition: opacity 0.2s ease;
+  }
+
+  .collective-card.expanded .collective-summary .card-arrow {
+    opacity: 0;
+  }
+
+  .collective-card:hover .card-label { color: var(--volt); }
+
+  /* Brand sub-grid */
+  .collective-brands {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.16,1,0.3,1),
+                opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .collective-card.expanded .collective-brands {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .brands-rule {
+    height: 1px;
+    background: var(--wire);
+    margin: 1.4rem 0 1rem;
+  }
+
+  .brands-label {
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    color: var(--mist);
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+
+  .brands-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--wire);
+    margin-bottom: 0.5rem;
+  }
+
+  .brand-tile {
+    background: var(--void);
+    padding: 0.9rem 0.85rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    transition: background 0.18s ease;
+    cursor: crosshair;
+  }
+
+  .brand-tile:hover { background: #0a0a00; }
+
+  .brand-tile:hover .brand-name { color: var(--volt); }
+
+  .brand-platform {
+    font-family: var(--font-mono);
+    font-size: 0.45rem;
+    letter-spacing: 0.25em;
+    color: var(--volt);
+    opacity: 0.7;
+    margin-bottom: 0.1rem;
+  }
+
+  /* Platform colour coding */
+  .brand-tile[data-brand="COC_PODCAST"]    .brand-platform { color: #ff0000; opacity: 0.8; } /* YT red */
+  .brand-tile[data-brand="TSE"]            .brand-platform { color: #ff0000; opacity: 0.8; }
+  .brand-tile[data-brand="TRAK_TEAM"]      .brand-platform { color: #1877f2; opacity: 0.8; } /* FB blue */
+  .brand-tile[data-brand="MARLANDA_DEKINE"].brand-platform { color: #ff6719; opacity: 0.8; } /* Substack orange */
+  .brand-tile[data-brand="STATE_OF_MYND"]  .brand-platform { color: #c13584; opacity: 0.8; } /* IG purple */
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.1;
+    transition: color 0.18s;
+  }
+
+  .brand-desc {
+    font-family: var(--font-mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    line-height: 1.6;
+    text-transform: uppercase;
+  }
+
+  .brand-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--volt);
+    opacity: 0;
+    margin-top: 0.3rem;
+    transition: opacity 0.18s ease;
+  }
+
+  .brand-tile:hover .brand-arrow { opacity: 1; }
+
+  /* 5th tile spans full width */
+  .brands-grid .brand-tile:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 480px) {
+    .brands-grid { grid-template-columns: 1fr; }
+    .brands-grid .brand-tile:last-child:nth-child(odd) { grid-column: 1; }
+  }
+
+  /* ─── SUBSTACK NEW POST ALERT ─────────────── */
+  .substack-alert {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    width: min(340px, 92vw);
+    background: var(--ash);
+    border: 1px solid var(--wire);
+    border-left: 3px solid var(--ember);
+    z-index: 800;
+    transform: translateX(calc(100% + 2rem));
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .substack-alert.show {
+    transform: translateX(0);
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  .substack-alert-inner {
+    padding: 1.1rem 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .substack-alert-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .substack-alert-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.48rem;
+    letter-spacing: 0.3em;
+    color: var(--ember);
+    text-transform: uppercase;
+  }
+
+  .substack-alert-close {
+    background: none;
+    border: none;
+    color: var(--dim);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    cursor: crosshair;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .substack-alert-close:hover { color: var(--white); }
+
+  .substack-alert-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.15;
+  }
+
+  .substack-alert-meta {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    color: var(--ghost);
+    letter-spacing: 0.12em;
+  }
+
+  .substack-alert-cta {
+    display: inline-block;
+    margin-top: 0.4rem;
+    background: var(--ember);
+    color: var(--void);
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    padding: 0.4rem 0.9rem;
+    text-decoration: none;
+    cursor: crosshair;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+
+  .substack-alert-cta:hover { background: #ff6622; }
+
+  /* Live pulse dot */
+  .substack-alert-dot {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--ember);
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    animation: blink 1.5s infinite;
+    vertical-align: middle;
+  }
+</style>
 </head>
 <body>
-    </body>
+
+<!-- ─── WEATHER CANVAS ──────────────────────────────── -->
+<canvas id="weatherCanvas"></canvas>
+<div id="weatherLabel"></div>
+
+<!-- ─── HEADER ─────────────────────────────────────── -->
+<header>
+  <a href="/" class="wordmark">MTI UNIVERSE</a>
+  <div style="display:flex; align-items:center; gap:1.5rem;">
+    <span class="header-tag">displayMRKTNG</span>
+    <span class="variant-badge" id="variantBadge"></span>
+  </div>
+</header>
+
+<!-- ─── HERO ───────────────────────────────────────── -->
+<section class="hero">
+  <p class="hero-kicker">// TRANSMISSION ACTIVE — SELECT YOUR NODE</p>
+  <h1 class="hero-title">ENTER<span>THE MTI</span>UNIVERSE</h1>
+  <p class="hero-sub">Nine nodes. One vault. The architecture is not neutral — the path forward is already encoded. Navigate with intent.</p>
+  <p class="session-ticker" id="sessionTicker">SESSION — —</p>
+</section>
+
+<!-- ─── GRID ───────────────────────────────────────── -->
+<section class="grid-section">
+  <div class="grid-a" id="mainGrid">
+
+    <!-- CARD 01 — THE VAULT (hero, always first) -->
+    <a href="https://mtiradio.substack.com/s/the-vault" class="card vault" data-node="THE_VAULT" data-url="https://mtiradio.substack.com/s/the-vault" target="_blank" rel="noopener noreferrer">
+      <div>
+        <span class="card-index">01 / PRIMARY NODE</span>
+        <div class="vault-badge">◈ RESTRICTED ACCESS</div>
+      </div>
+      <div>
+        <div class="card-label">THE VAULT</div>
+        <div class="card-desc">Core archive. Unreleased material.<br>Members only.</div>
+        <div class="card-arrow">→ ENTER</div>
+      </div>
+    </a>
+
+    <!-- CARD 02 -->
+    <a href="#" class="card" data-node="MTI_RADIO" data-url="#">
+      <span class="card-index">02 / AUDIO</span>
+      <div>
+        <div class="card-label">MTI RADIO</div>
+        <div class="card-desc">Live sessions.<br>Frequency drops.</div>
+        <div class="card-arrow">→ TUNE IN</div>
+      </div>
+    </a>
+
+    <!-- CARD 03 -->
+    <a href="#" class="card" data-node="AKATA_VISIONS" data-url="#">
+      <span class="card-index">03 / VISUAL</span>
+      <div>
+        <div class="card-label">AKATA VISIONS</div>
+        <div class="card-desc">Direction. Film. Identity.<br>Moving image.</div>
+        <div class="card-arrow">→ VIEW</div>
+      </div>
+    </a>
+
+    <!-- CARD 04 -->
+    <a href="#" class="card" data-node="SUBSTACK" data-url="#">
+      <span class="card-index">04 / EDITORIAL</span>
+      <div>
+        <div class="card-label">SUBSTACK</div>
+        <div class="card-desc">Long-form intelligence.<br>The dispatch.</div>
+        <div class="card-arrow">→ READ</div>
+      </div>
+    </a>
+
+    <!-- CARD 05 -->
+    <a href="#" class="card" data-node="MRKTNG_LAB" data-url="#">
+      <span class="card-index">05 / STRATEGY</span>
+      <div>
+        <div class="card-label">MRKTNG LAB</div>
+        <div class="card-desc">Infrastructure. Growth.<br>System architecture.</div>
+        <div class="card-arrow">→ BUILD</div>
+      </div>
+    </a>
+
+    <!-- CARD 06 -->
+    <a href="#" class="card" data-node="ARCHIVE" data-url="#">
+      <span class="card-index">06 / CATALOG</span>
+      <div>
+        <div class="card-label">ARCHIVE</div>
+        <div class="card-desc">The full body of work.<br>Indexed. Permanent.</div>
+        <div class="card-arrow">→ EXPLORE</div>
+      </div>
+    </a>
+
+    <!-- CARD 07 -->
+    <a href="#" class="card" data-node="LIVE" data-url="#">
+      <span class="card-index">07 / EVENTS</span>
+      <div>
+        <div class="card-label">LIVE</div>
+        <div class="card-desc">Appearances. Shows.<br>Presence.</div>
+        <div class="card-arrow">→ UPCOMING</div>
+      </div>
+    </a>
+
+    <!-- CARD 08 — COLLECTIVE (expandable) -->
+    <div class="card collective-card" data-node="COLLECTIVE" id="collectiveCard">
+      <div class="collective-header">
+        <span class="card-index">08 / NETWORK</span>
+        <div class="collective-toggle" id="collectiveToggle" aria-label="Expand collective">
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="collective-summary">
+        <div class="card-label">COLLECTIVE</div>
+        <div class="card-desc">The network.<br>The operators.</div>
+        <div class="card-arrow">→ EXPAND</div>
+      </div>
+
+      <!-- Brand sub-grid — hidden until expanded -->
+      <div class="collective-brands" id="collectiveBrands">
+        <div class="brands-rule"></div>
+        <p class="brands-label">// NETWORK BRANDS</p>
+        <div class="brands-grid">
+
+          <a href="https://www.youtube.com/@COCPodcast614"
+             class="brand-tile" data-brand="COC_PODCAST"
+             target="_blank" rel="noopener noreferrer">
+            <div class="brand-platform">YT</div>
+            <div class="brand-name">COC PODCAST</div>
+            <div class="brand-desc">Culture. Opinion. Conversation.</div>
+            <div class="brand-arrow">↗</div>
+          </a>
+
+          <a href="https://www.youtube.com/@tsetopshelfentertainment2648"
+             class="brand-tile" data-brand="TSE"
+             target="_blank" rel="noopener noreferrer">
+            <div class="brand-platform">YT</div>
+            <div class="brand-name">TSE</div>
+            <div class="brand-desc">Top Shelf Entertainment.</div>
+            <div class="brand-arrow">↗</div>
+          </a>
+
+          <a href="https://www.facebook.com/profile.php?id=61576360502116"
+             class="brand-tile" data-brand="TRAK_TEAM"
+             target="_blank" rel="noopener noreferrer">
+            <div class="brand-platform">FB</div>
+            <div class="brand-name">TRAK TEAM DJs</div>
+            <div class="brand-desc">The selectors. The sound.</div>
+            <div class="brand-arrow">↗</div>
+          </a>
+
+          <a href="https://substack.com/@dekinesoul?utm_source=global-search"
+             class="brand-tile" data-brand="MARLANDA_DEKINE"
+             target="_blank" rel="noopener noreferrer">
+            <div class="brand-platform">SS</div>
+            <div class="brand-name">MARLANDA DEKINE</div>
+            <div class="brand-desc">Words. Soul. Dispatch.</div>
+            <div class="brand-arrow">↗</div>
+          </a>
+
+          <a href="https://www.instagram.com/tqstateofmynd/"
+             class="brand-tile" data-brand="STATE_OF_MYND"
+             target="_blank" rel="noopener noreferrer">
+            <div class="brand-platform">IG</div>
+            <div class="brand-name">STATE OF MYND</div>
+            <div class="brand-desc">Frequency. Vision. Identity.</div>
+            <div class="brand-arrow">↗</div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 09 -->
+    <a href="#" class="card" data-node="SHOP" data-url="#">
+      <span class="card-index">09 / OBJECTS</span>
+      <div>
+        <div class="card-label">SHOP</div>
+        <div class="card-desc">Physical artifacts.<br>Limited editions.</div>
+        <div class="card-arrow">→ ACQUIRE</div>
+      </div>
+    </a>
+
+  </div><!-- /#mainGrid -->
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────── -->
+<footer>
+  <span class="footer-copy">© MTI UNIVERSE — DISPLAYMRKTNG — ALL TRANSMISSIONS MONITORED</span>
+  <span class="footer-status">
+    <span class="status-dot"></span>
+    LIVE
+  </span>
+</footer>
+
+<!-- ─── LEAD CAPTURE MODAL ─────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕ CLOSE</button>
+
+    <p class="modal-eyebrow">// RESTRICTED CHANNEL OPEN</p>
+    <h2 class="modal-title" id="modalTitle">UNLOCK<span><br>THE VAULT</span></h2>
+    <p class="modal-body">
+      First access. Unreleased audio. The full archive.<br>
+      One email. Zero noise. Drop in — get the code before this closes.
+    </p>
+
+    <div class="modal-form" id="modalForm">
+      <input
+        type="email"
+        class="modal-input"
+        id="emailInput"
+        placeholder="YOUR EMAIL ADDRESS"
+        autocomplete="email"
+        required
+      />
+      <input
+        type="tel"
+        class="modal-input"
+        id="smsInput"
+        placeholder="SMS (OPTIONAL — EARLY DROPS)"
+        autocomplete="tel"
+      />
+      <button class="modal-submit" id="modalSubmit">SEND ME THE CODE</button>
+      <p class="modal-disclaimer">
+        No spam. No noise. Unsubscribe any time.<br>
+        Your data stays inside the MTI ecosystem.
+      </p>
+    </div>
+
+    <div class="modal-success" id="modalSuccess">
+      <p class="success-label">YOUR VAULT ACCESS CODE</p>
+      <div class="success-code" id="accessCode">——</div>
+      <p class="success-label">
+        CHECK YOUR EMAIL FOR FULL INSTRUCTIONS.<br>
+        THE VAULT OPENS WHEN YOU ARRIVE WITH THE CODE.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── GEMINI NAVIGATOR ────────────────────────────── -->
+<div class="nav-overlay" id="navOverlay">
+  <div class="nav-panel" role="dialog" aria-modal="true" aria-label="MTI Navigator">
+
+    <div class="nav-header">
+      <div class="nav-header-text">
+        <p class="nav-eyebrow">// AI NAVIGATOR — ONLINE</p>
+        <h2 class="nav-title">MTI SIGNAL</h2>
+      </div>
+      <button class="nav-close" id="navClose">✕ CLOSE</button>
+    </div>
+
+    <div class="nav-messages" id="navMessages">
+      <!-- messages injected by JS -->
+    </div>
+
+    <div class="nav-input-row">
+      <input
+        type="text"
+        class="nav-input"
+        id="navInput"
+        placeholder="WHAT ARE YOU LOOKING FOR..."
+        autocomplete="off"
+        maxlength="200"
+      />
+      <button class="nav-send" id="navSend">→ SEND</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── SUBSTACK NEW POST ALERT ─────────────────────── -->
+<div class="substack-alert" id="substackAlert" role="alert" aria-live="polite">
+  <div class="substack-alert-inner">
+    <div class="substack-alert-top">
+      <span class="substack-alert-eyebrow">
+        <span class="substack-alert-dot"></span>NEW TRANSMISSION
+      </span>
+      <button class="substack-alert-close" id="substackAlertClose">✕</button>
+    </div>
+    <div class="substack-alert-title" id="substackAlertTitle">—</div>
+    <div class="substack-alert-meta" id="substackAlertMeta">MTI RADIO — SUBSTACK</div>
+    <a href="https://mtiradio.substack.com" class="substack-alert-cta" id="substackAlertLink" target="_blank" rel="noopener noreferrer">→ READ NOW</a>
+  </div>
+</div>
+
+<script>
+(function() {
+
+  /* ── ENVIRONMENTAL SENSORY SHIFT ────────────────── */
+  (function initTimeState() {
+    const hour = new Date().getHours();
+    const root = document.documentElement;
+
+    if (hour >= 5 && hour < 12) {
+      root.style.setProperty('--void', '#080a0f'); // Morning: Deep cool ambient
+    } else if (hour >= 12 && hour < 18) {
+      root.style.setProperty('--void', '#0a0a0a'); // Day: Standard ash
+    } else if (hour >= 18 && hour < 22) {
+      root.style.setProperty('--void', '#120804'); // Evening: Subtle ember tint
+    } else {
+      root.style.setProperty('--void', '#000000'); // Night: Absolute void
+    }
+  })();
+
+  /* ── WEATHER BACKGROUND ENGINE ───────────────────── */
+  (function initWeather() {
+    const canvas  = document.getElementById('weatherCanvas');
+    const label   = document.getElementById('weatherLabel');
+    const ctx     = canvas.getContext('2d');
+
+    // ── CONFIG — paste your OpenWeatherMap key here when ready ──
+    const OWM_KEY = 'YOUR_OWM_KEY'; // get free at openweathermap.org/api
+
+    let W = 0, H = 0;
+    let particles = [];
+    let animFrame = null;
+    let currentState = null;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); buildParticles(currentState); });
+
+    /* ── WEATHER STATES ─────────────────────────────── */
+    const STATES = {
+      CLEAR_DAY: {
+        label: '☀ SUNNY',
+        bg: 'transparent',
+        build(n) {
+          // Heat shimmer / light dust particles rising from bottom
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W,
+            y: H * 0.4 + Math.random() * H * 0.6,
+            r: Math.random() * 1.2 + 0.2,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: -(Math.random() * 0.5 + 0.1),
+            alpha: Math.random() * 0.12 + 0.02,
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpeed: Math.random() * 0.02 + 0.008
+          });
+        },
+        draw() {
+          const t = Date.now() / 1000;
+
+          // ── Sky gradient wash ──
+          const skyWash = ctx.createLinearGradient(0, 0, 0, H);
+          skyWash.addColorStop(0,   'rgba(255,160,20,0.055)');
+          skyWash.addColorStop(0.3, 'rgba(255,200,60,0.03)');
+          skyWash.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.fillStyle = skyWash;
+          ctx.fillRect(0, 0, W, H);
+
+          // ── Sun position — upper right, feels natural ──
+          const sx = W * 0.78;
+          const sy = H * 0.14;
+          const sr = Math.min(W, H) * 0.055; // sun radius scales with screen
+
+          // ── Outer corona / atmosphere ──
+          const corona = ctx.createRadialGradient(sx, sy, sr * 0.8, sx, sy, sr * 5.5);
+          corona.addColorStop(0,   'rgba(255,200,60,0.10)');
+          corona.addColorStop(0.3, 'rgba(255,160,20,0.05)');
+          corona.addColorStop(0.6, 'rgba(255,120,0,0.02)');
+          corona.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.fillStyle = corona;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sr * 5.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ── Mid glow ring ──
+          const midGlow = ctx.createRadialGradient(sx, sy, sr * 0.5, sx, sy, sr * 2.2);
+          midGlow.addColorStop(0,   'rgba(255,220,80,0.18)');
+          midGlow.addColorStop(0.5, 'rgba(255,180,40,0.08)');
+          midGlow.addColorStop(1,   'rgba(0,0,0,0)');
+          ctx.fillStyle = midGlow;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sr * 2.2, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ── Animated rays ──
+          const rayCount = 12;
+          const rayRotation = t * 0.03; // very slow rotation
+          ctx.save();
+          ctx.translate(sx, sy);
+          ctx.rotate(rayRotation);
+          for (let i = 0; i < rayCount; i++) {
+            const angle = (i / rayCount) * Math.PI * 2;
+            const innerR = sr * 1.35;
+            const outerR = sr * (2.4 + 0.4 * Math.sin(t * 1.2 + i * 0.8)); // breathing
+            const rayW   = sr * 0.08;
+            const pulse  = 0.55 + 0.25 * Math.sin(t * 0.9 + i * 0.5);
+
+            ctx.save();
+            ctx.rotate(angle);
+            const rayGrad = ctx.createLinearGradient(0, innerR, 0, outerR);
+            rayGrad.addColorStop(0,   `rgba(255,220,80,${0.22 * pulse})`);
+            rayGrad.addColorStop(0.5, `rgba(255,180,40,${0.10 * pulse})`);
+            rayGrad.addColorStop(1,   'rgba(255,140,0,0)');
+            ctx.fillStyle = rayGrad;
+            ctx.beginPath();
+            ctx.moveTo(-rayW, innerR);
+            ctx.lineTo(0, outerR);
+            ctx.lineTo(rayW, innerR);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          }
+          ctx.restore();
+
+          // ── Sun disc ──
+          const discGrad = ctx.createRadialGradient(
+            sx - sr * 0.25, sy - sr * 0.25, sr * 0.05,
+            sx, sy, sr
+          );
+          discGrad.addColorStop(0,   'rgba(255,255,200,0.95)');
+          discGrad.addColorStop(0.4, 'rgba(255,230,80,0.90)');
+          discGrad.addColorStop(0.8, 'rgba(255,180,20,0.85)');
+          discGrad.addColorStop(1,   'rgba(255,140,0,0.80)');
+          ctx.fillStyle = discGrad;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ── Sun inner highlight (limb brightening) ──
+          const highlight = ctx.createRadialGradient(
+            sx - sr * 0.3, sy - sr * 0.3, 0,
+            sx - sr * 0.3, sy - sr * 0.3, sr * 0.65
+          );
+          highlight.addColorStop(0,   'rgba(255,255,240,0.45)');
+          highlight.addColorStop(1,   'rgba(255,255,240,0)');
+          ctx.fillStyle = highlight;
+          ctx.beginPath();
+          ctx.arc(sx, sy, sr, 0, Math.PI * 2);
+          ctx.fill();
+
+          // ── Heat shimmer particles ──
+          particles.forEach(p => {
+            const wobble = Math.sin(t * p.wobbleSpeed * 60 + p.wobble) * 0.5;
+            ctx.beginPath();
+            ctx.arc(p.x + wobble, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,200,80,${p.alpha})`;
+            ctx.fill();
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.y < H * 0.2) {
+              p.y = H * 0.9 + Math.random() * H * 0.1;
+              p.x = Math.random() * W;
+              p.alpha = Math.random() * 0.12 + 0.02;
+            }
+          });
+
+          // ── Lens flare streak ──
+          const flareAlpha = 0.04 + 0.02 * Math.sin(t * 0.4);
+          const flare = ctx.createLinearGradient(sx - W * 0.5, sy + H * 0.3, sx + W * 0.3, sy - H * 0.1);
+          flare.addColorStop(0,   'rgba(255,220,80,0)');
+          flare.addColorStop(0.5, `rgba(255,220,80,${flareAlpha})`);
+          flare.addColorStop(1,   'rgba(255,220,80,0)');
+          ctx.fillStyle = flare;
+          ctx.fillRect(0, 0, W, H);
+        }
+      },
+
+      CLEAR_NIGHT: {
+        label: '★ CLEAR NIGHT',
+        bg: 'transparent',
+        build(n) {
+          // Stars — varied sizes and twinkle speeds
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W, y: Math.random() * H * 0.85,
+            r: Math.random() * 1.2 + 0.2,
+            baseAlpha: Math.random() * 0.6 + 0.2,
+            alpha: 0,
+            twinkleSpeed: Math.random() * 0.015 + 0.003,
+            twinkleOffset: Math.random() * Math.PI * 2,
+            color: Math.random() > 0.85 ? 'rgba(180,220,255,' : 'rgba(255,255,255,'
+          });
+        },
+        draw() {
+          const t = Date.now() / 1000;
+          particles.forEach(p => {
+            p.alpha = p.baseAlpha * (0.5 + 0.5 * Math.sin(t * p.twinkleSpeed * 60 + p.twinkleOffset));
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color + p.alpha + ')';
+            ctx.fill();
+          });
+          // Occasional shooting star
+          if (Math.random() < 0.0008) spawnShootingStar();
+          drawShootingStars();
+        }
+      },
+
+      CLOUDY: {
+        label: '◌ OVERCAST',
+        bg: 'transparent',
+        build(n) {
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W * 1.4 - W * 0.2,
+            y: Math.random() * H * 0.6,
+            w: Math.random() * 280 + 120,
+            h: Math.random() * 60 + 30,
+            vx: Math.random() * 0.12 + 0.03,
+            alpha: Math.random() * 0.07 + 0.02
+          });
+        },
+        draw() {
+          particles.forEach(p => {
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w / 1.5);
+            g.addColorStop(0, `rgba(140,160,180,${p.alpha})`);
+            g.addColorStop(1, 'rgba(100,120,140,0)');
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.ellipse(p.x, p.y, p.w, p.h, 0, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.vx;
+            if (p.x - p.w > W) p.x = -p.w;
+          });
+          // Cool blue-grey wash
+          const wash = ctx.createLinearGradient(0, 0, 0, H);
+          wash.addColorStop(0, 'rgba(80,100,130,0.06)');
+          wash.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = wash;
+          ctx.fillRect(0, 0, W, H);
+        }
+      },
+
+      RAIN: {
+        label: '// RAIN',
+        bg: 'transparent',
+        build(n) {
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            len: Math.random() * 14 + 8,
+            speed: Math.random() * 4 + 6,
+            alpha: Math.random() * 0.18 + 0.06
+          });
+        },
+        draw() {
+          ctx.strokeStyle = 'rgba(140,180,220,0)'; // reset
+          particles.forEach(p => {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x - 1, p.y + p.len);
+            ctx.strokeStyle = `rgba(140,180,220,${p.alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+            p.y += p.speed;
+            if (p.y > H) { p.y = -p.len; p.x = Math.random() * W; }
+          });
+          // Dark blue wash
+          const wash = ctx.createLinearGradient(0, 0, 0, H);
+          wash.addColorStop(0, 'rgba(20,40,80,0.08)');
+          wash.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = wash;
+          ctx.fillRect(0, 0, W, H);
+        }
+      },
+
+      STORM: {
+        label: '⚡ STORM',
+        bg: 'transparent',
+        build(n) {
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            len: Math.random() * 20 + 12,
+            speed: Math.random() * 8 + 10,
+            alpha: Math.random() * 0.22 + 0.08
+          });
+        },
+        draw() {
+          particles.forEach(p => {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x - 2, p.y + p.len);
+            ctx.strokeStyle = `rgba(100,140,200,${p.alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+            p.y += p.speed;
+            if (p.y > H) { p.y = -p.len; p.x = Math.random() * W; }
+          });
+          // Lightning flash
+          if (Math.random() < 0.003) {
+            ctx.fillStyle = 'rgba(200,220,255,0.04)';
+            ctx.fillRect(0, 0, W, H);
+          }
+          const wash = ctx.createLinearGradient(0, 0, 0, H);
+          wash.addColorStop(0, 'rgba(10,15,40,0.12)');
+          wash.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = wash;
+          ctx.fillRect(0, 0, W, H);
+        }
+      },
+
+      FOG: {
+        label: '◫ FOG',
+        bg: 'transparent',
+        build(n) {
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            w: Math.random() * 400 + 200,
+            h: Math.random() * 100 + 60,
+            vx: (Math.random() - 0.5) * 0.08,
+            vy: (Math.random() - 0.5) * 0.04,
+            alpha: Math.random() * 0.06 + 0.015,
+            pulse: Math.random() * Math.PI * 2,
+            pulseSpeed: Math.random() * 0.005 + 0.002
+          });
+        },
+        draw() {
+          const t = Date.now() / 1000;
+          particles.forEach(p => {
+            const a = p.alpha * (0.7 + 0.3 * Math.sin(t * p.pulseSpeed * 60 + p.pulse));
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.w / 1.2);
+            g.addColorStop(0, `rgba(160,165,170,${a})`);
+            g.addColorStop(1, 'rgba(120,125,130,0)');
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.ellipse(p.x, p.y, p.w, p.h, 0, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < -p.w) p.x = W + p.w;
+            if (p.x > W + p.w) p.x = -p.w;
+            if (p.y < -p.h) p.y = H + p.h;
+            if (p.y > H + p.h) p.y = -p.h;
+          });
+        }
+      },
+
+      SNOW: {
+        label: '* SNOW',
+        bg: 'transparent',
+        build(n) {
+          for (let i = 0; i < n; i++) particles.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 2 + 0.5,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: Math.random() * 0.8 + 0.3,
+            alpha: Math.random() * 0.5 + 0.2,
+            drift: Math.random() * Math.PI * 2,
+            driftSpeed: Math.random() * 0.01 + 0.005
+          });
+        },
+        draw() {
+          const t = Date.now() / 1000;
+          particles.forEach(p => {
+            const drift = Math.sin(t * p.driftSpeed * 60 + p.drift) * 0.4;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(220,230,255,${p.alpha})`;
+            ctx.fill();
+            p.x += p.vx + drift;
+            p.y += p.vy;
+            if (p.y > H + 5) { p.y = -5; p.x = Math.random() * W; }
+          });
+          // Cool blue tint
+          const wash = ctx.createLinearGradient(0, 0, 0, H);
+          wash.addColorStop(0, 'rgba(60,80,140,0.05)');
+          wash.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.fillStyle = wash;
+          ctx.fillRect(0, 0, W, H);
+        }
+      }
+    };
+
+    /* ── SHOOTING STARS (night only) ──────────────── */
+    let shootingStars = [];
+    function spawnShootingStar() {
+      shootingStars.push({
+        x: Math.random() * W * 0.7 + W * 0.1,
+        y: Math.random() * H * 0.3,
+        len: Math.random() * 120 + 60,
+        speed: Math.random() * 6 + 8,
+        angle: Math.PI / 4 + (Math.random() - 0.5) * 0.3,
+        alpha: 0.8,
+        fade: 0.025
+      });
+    }
+    function drawShootingStars() {
+      shootingStars = shootingStars.filter(s => s.alpha > 0);
+      shootingStars.forEach(s => {
+        ctx.save();
+        ctx.translate(s.x, s.y);
+        ctx.rotate(s.angle);
+        const g = ctx.createLinearGradient(-s.len, 0, 0, 0);
+        g.addColorStop(0, 'rgba(255,255,255,0)');
+        g.addColorStop(1, `rgba(255,255,255,${s.alpha})`);
+        ctx.strokeStyle = g;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(-s.len, 0);
+        ctx.lineTo(0, 0);
+        ctx.stroke();
+        ctx.restore();
+        s.x += Math.cos(s.angle) * s.speed;
+        s.y += Math.sin(s.angle) * s.speed;
+        s.alpha -= s.fade;
+      });
+    }
+
+    /* ── PARTICLE COUNT BY SCREEN ─────────────────── */
+    function particleCount(state) {
+      const base = W < 768 ? 60 : 140;
+      const counts = {
+        CLEAR_DAY: base, CLEAR_NIGHT: Math.floor(base * 2.5),
+        CLOUDY: Math.floor(base * 0.4), RAIN: Math.floor(base * 1.8),
+        STORM: Math.floor(base * 2.2), FOG: Math.floor(base * 0.3),
+        SNOW: Math.floor(base * 1.2)
+      };
+      return counts[state] || base;
+    }
+
+    function buildParticles(state) {
+      particles = [];
+      if (state && STATES[state]) {
+        STATES[state].build(particleCount(state));
+      }
+    }
+
+    /* ── ANIMATION LOOP ───────────────────────────── */
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      if (currentState && STATES[currentState]) {
+        STATES[currentState].draw();
+      }
+      animFrame = requestAnimationFrame(loop);
+    }
+
+    /* ── APPLY STATE ──────────────────────────────── */
+    function applyState(stateKey, source) {
+      currentState = stateKey;
+      buildParticles(stateKey);
+      label.textContent = (STATES[stateKey]?.label || '') + (source ? '  ' + source : '');
+      canvas.classList.add('visible');
+      fireEvent('WEATHER_STATE', { state: stateKey, source });
+    }
+
+    /* ── TIME-OF-DAY FALLBACK ─────────────────────── */
+    function timeBasedState() {
+      const h = new Date().getHours();
+      if (h >= 5  && h < 8)  return 'CLEAR_DAY';
+      if (h >= 8  && h < 18) return 'CLEAR_DAY';
+      if (h >= 18 && h < 21) return 'CLOUDY';
+      return 'CLEAR_NIGHT';
+    }
+
+    /* ── MAP OWM CODE → STATE ─────────────────────── */
+    function owmToState(code, isDay) {
+      if (code >= 200 && code < 300) return 'STORM';
+      if (code >= 300 && code < 600) return 'RAIN';
+      if (code >= 600 && code < 700) return 'SNOW';
+      if (code >= 700 && code < 800) return 'FOG';
+      if (code === 800) return isDay ? 'CLEAR_DAY' : 'CLEAR_NIGHT';
+      if (code > 800)  return 'CLOUDY';
+      return isDay ? 'CLEAR_DAY' : 'CLEAR_NIGHT';
+    }
+
+    /* ── FETCH LIVE WEATHER ───────────────────────── */
+    function fetchWeather(lat, lon) {
+      if (!OWM_KEY || OWM_KEY === 'YOUR_OWM_KEY') {
+        applyState(timeBasedState(), '// TIME FALLBACK');
+        return;
+      }
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OWM_KEY}`;
+      fetch(url)
+        .then(r => r.json())
+        .then(d => {
+          const code  = d?.weather?.[0]?.id || 800;
+          const h     = new Date().getHours();
+          const isDay = h >= 6 && h < 20;
+          applyState(owmToState(code, isDay), '// LIVE');
+        })
+        .catch(() => applyState(timeBasedState(), '// TIME FALLBACK'));
+    }
+
+    /* ── GEOLOCATION ──────────────────────────────── */
+    function init() {
+      loop(); // start canvas loop immediately
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          pos => fetchWeather(pos.coords.latitude, pos.coords.longitude),
+          ()  => applyState(timeBasedState(), '// TIME FALLBACK'),
+          { timeout: 6000, maximumAge: 300000 }
+        );
+      } else {
+        applyState(timeBasedState(), '// TIME FALLBACK');
+      }
+    }
+
+    init();
+  })();
+
+
+  /* ── CONFIG ── UPDATE THESE ─────────────────────────
+     Replace with your actual CRM / webhook endpoints.
+     Supports Zapier, Make (Integromat), Airtable, ConvertKit, etc.
+  ──────────────────────────────────────────────────── */
+  const CONFIG = {
+    // Webhook for lead capture (Zapier / Make / n8n)
+    leadWebhook: 'https://hook.us2.make.com/kiep28g89j2bwvelmmolknmbbsy2d8r4',
+
+    // Webhook for behavioral event tracking
+    eventWebhook: 'https://hook.us2.make.com/kiep28g89j2bwvelmmolknmbbsy2d8r4',
+
+    // Show modal after N card clicks
+    modalAfterClicks: 2,
+
+    // A/B: force variant via URL param ?v=b
+    abParam: 'v',
+
+    // Gemini API
+    geminiKey: 'AIzaSyAmoE0OngbWlC0cNQ0SKmS_XI2VVZvkKqE',
+    geminiModel: 'gemini-1.5-flash-latest',
+  };
+
+  /* ── SESSION ID ─────────────────────────────────── */
+  function genSessionId() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let id = 'MTI-';
+    for (let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
+    return id;
+  }
+
+  const SESSION_ID = sessionStorage.getItem('mti_session') || genSessionId();
+  sessionStorage.setItem('mti_session', SESSION_ID);
+  document.getElementById('sessionTicker').textContent = 'SESSION — ' + SESSION_ID;
+  document.getElementById('variantBadge').textContent = '';
+
+  /* ── A/B VARIANT ────────────────────────────────── */
+  const urlParams = new URLSearchParams(window.location.search);
+  const variant = urlParams.get(CONFIG.abParam) || 'a';
+  const isVariantB = variant === 'b';
+
+  const grid = document.getElementById('mainGrid');
+  if (isVariantB) {
+    grid.className = 'grid-b';
+    document.getElementById('variantBadge').textContent = 'VAR:B';
+  } else {
+    document.getElementById('variantBadge').textContent = 'VAR:A';
+  }
+
+  /* ── EVENT TRACKING ─────────────────────────────── */
+  let clickCount = 0;
+  const eventLog = [];
+
+  function fireEvent(type, payload) {
+    const ev = {
+      session: SESSION_ID,
+      variant: variant,
+      type: type,
+      ts: new Date().toISOString(),
+      ...payload
+    };
+    eventLog.push(ev);
+    console.log('[MTI:TRACK]', ev);
+
+    // Fire to webhook (non-blocking, silent fail)
+    if (CONFIG.eventWebhook && !CONFIG.eventWebhook.includes('YOUR_')) {
+      fetch(CONFIG.eventWebhook, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ev),
+        keepalive: true
+      }).catch(() => {});
+    }
+  }
+
+  // Track page load
+  fireEvent('PAGE_VIEW', {
+    referrer: document.referrer || 'direct',
+    ua: navigator.userAgent.substring(0, 80)
+  });
+
+  /* ── CARD CLICK TRACKING ────────────────────────── */
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      const node = this.dataset.node;
+      const url  = this.dataset.url;
+
+      clickCount++;
+
+      // pulse effect
+      this.classList.add('clicked');
+      setTimeout(() => this.classList.remove('clicked'), 400);
+
+      fireEvent('CARD_CLICK', { node, clickCount });
+
+      // Show modal after N clicks if not captured
+      if (clickCount >= CONFIG.modalAfterClicks && !isModalDismissed() && !isCaptured()) {
+        e.preventDefault();
+        openModal();
+        return;
+      }
+
+      // If url is real, navigate
+      if (url && url !== '#') {
+        // allow default navigation
+      } else {
+        e.preventDefault();
+      }
+    });
+  });
+
+  /* ── MODAL ──────────────────────────────────────── */
+  const overlay   = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+  const modalForm  = document.getElementById('modalForm');
+  const modalSuccess = document.getElementById('modalSuccess');
+  const modalSubmit  = document.getElementById('modalSubmit');
+  const emailInput   = document.getElementById('emailInput');
+  const smsInput     = document.getElementById('smsInput');
+  const accessCodeEl = document.getElementById('accessCode');
+
+  function openModal() {
+    overlay.classList.add('active');
+    setTimeout(() => emailInput.focus(), 350);
+    fireEvent('MODAL_OPEN', {});
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+  }
+
+  function isCaptured() {
+    // Persists across the session only after they actually submit
+    return sessionStorage.getItem('mti_captured') === '1';
+  }
+
+  function isModalDismissed() {
+    // Resets on every page load — only blocked within the same page session
+    return window._mtiDismissed === true;
+  }
+
+  function setModalDismissed() {
+    window._mtiDismissed = true;
+  }
+
+  modalClose.addEventListener('click', function() {
+    closeModal();
+    setModalDismissed();
+    fireEvent('MODAL_DISMISSED', {});
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      closeModal();
+      setModalDismissed();
+      fireEvent('MODAL_DISMISSED', {});
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeModal();
+      setModalDismissed();
+    }
+  });
+
+  /* ── FORM SUBMIT ──────────────────────────────── */
+  modalSubmit.addEventListener('click', function() {
+    const email = emailInput.value.trim();
+    const sms   = smsInput.value.trim();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailInput.focus();
+      emailInput.style.borderColor = '#ff4d00';
+      setTimeout(() => emailInput.style.borderColor = '', 1200);
+      return;
+    }
+
+    modalSubmit.textContent = 'TRANSMITTING...';
+    modalSubmit.disabled = true;
+
+    const code = 'VAULT-' + Math.random().toString(36).substring(2,6).toUpperCase();
+
+    const leadPayload = {
+      session: SESSION_ID,
+      variant: variant,
+      email: email,
+      sms: sms || null,
+      accessCode: code,
+      ts: new Date().toISOString(),
+      clickCountAtCapture: clickCount
+    };
+
+    fireEvent('LEAD_CAPTURED', leadPayload);
+
+    // Submit to lead webhook
+    const submitToWebhook = (CONFIG.leadWebhook && !CONFIG.leadWebhook.includes('YOUR_'))
+      ? fetch(CONFIG.leadWebhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadPayload),
+          keepalive: true
+        }).catch(() => {})
+      : Promise.resolve();
+
+    submitToWebhook.finally(() => {
+      sessionStorage.setItem('mti_captured', '1');
+      accessCodeEl.textContent = code;
+      modalForm.classList.add('hide');
+      modalSuccess.classList.add('show');
+
+      // Show code for 3.5s → close modal → open Gemini navigator
+      setTimeout(() => {
+        closeModal();
+        setTimeout(openNavigator, 400);
+      }, 3500);
+    });
+  });
+
+  /* ── PREFILL / PERSISTENCE ──────────────────────── */
+  // Session already captured — modal will not re-trigger
+
+  /* ── GEMINI NAVIGATOR ───────────────────────────── */
+  const NAV_SYSTEM_PROMPT = `You are the MTI Signal — the AI navigator of the MTI Universe, a creative ecosystem built by MTI (displayMRKTNG). Your role is to guide users to the node that best matches what they are looking for. Speak in a raw, direct, minimal tone. No filler. No corporate language. Short sentences. You know the nine nodes:
+
+1. THE VAULT — Core archive. Restricted access. Unreleased material, exclusive audio, members-only content. The primary destination.
+2. MTI RADIO — Live audio sessions, frequency drops, music transmissions.
+3. AKATA VISIONS — Visual direction, film, brand identity, moving image work.
+4. SUBSTACK — Long-form editorial intelligence. The dispatch. Deep thinking.
+5. MRKTNG LAB — Marketing infrastructure, growth systems, strategic architecture.
+6. ARCHIVE — The full indexed catalog of past work. Permanent record.
+7. LIVE — Appearances, shows, events, physical presence.
+8. COLLECTIVE — The network. Collaborators and operators in the ecosystem.
+9. SHOP — Physical artifacts, limited edition objects.
+
+When you identify the right node for the user, always end your response with a JSON block on its own line in this exact format:
+{"node":"NODE_NAME","label":"DISPLAY LABEL","url":"#"}
+
+Replace NODE_NAME with one of: THE_VAULT, MTI_RADIO, AKATA_VISIONS, SUBSTACK, MRKTNG_LAB, ARCHIVE, LIVE, COLLECTIVE, SHOP
+Replace DISPLAY LABEL with the node's display name.
+If the user's intent is unclear, ask one sharp clarifying question. Keep all responses under 60 words.`;
+
+  const navOverlay  = document.getElementById('navOverlay');
+  const navMessages = document.getElementById('navMessages');
+  const navInput    = document.getElementById('navInput');
+  const navSend     = document.getElementById('navSend');
+  const navClose    = document.getElementById('navClose');
+
+  let navHistory = []; // {role, parts} for Gemini multi-turn
+  let navOpen = false;
+
+  function openNavigator() {
+    navOverlay.classList.add('active');
+    navOpen = true;
+    fireEvent('NAVIGATOR_OPEN', {});
+
+    // Only greet on first open
+    if (navMessages.children.length === 0) {
+      appendNavMessage('system', 'Signal online. What are you here for?');
+    }
+
+    setTimeout(() => navInput.focus(), 350);
+  }
+
+  function closeNavigator() {
+    navOverlay.classList.remove('active');
+    navOpen = false;
+  }
+
+  navClose.addEventListener('click', closeNavigator);
+  navOverlay.addEventListener('click', e => {
+    if (e.target === navOverlay) closeNavigator();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navOpen) closeNavigator();
+  });
+
+  function appendNavMessage(role, text, nodeData) {
+    const msg = document.createElement('div');
+    msg.className = `msg ${role}`;
+
+    const label = document.createElement('div');
+    label.className = 'msg-label';
+    label.textContent = role === 'system' ? 'MTI SIGNAL' : 'YOU';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.textContent = text;
+
+    msg.appendChild(label);
+    msg.appendChild(bubble);
+
+    // Attach node chip if recommendation came through
+    if (nodeData) {
+      const chip = document.createElement('a');
+      chip.className = 'node-chip';
+      chip.href = nodeData.url || '#';
+      chip.textContent = '→ ' + nodeData.label;
+      chip.dataset.node = nodeData.node;
+      chip.addEventListener('click', function(e) {
+        e.preventDefault();
+        fireEvent('NAVIGATOR_NODE_CLICK', { node: nodeData.node });
+        closeNavigator();
+        // If url real, navigate — otherwise highlight the card
+        const card = document.querySelector(`[data-node="${nodeData.node}"]`);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.classList.add('clicked');
+          setTimeout(() => card.classList.remove('clicked'), 600);
+        }
+      });
+      msg.appendChild(chip);
+    }
+
+    navMessages.appendChild(msg);
+    navMessages.scrollTop = navMessages.scrollHeight;
+    return msg;
+  }
+
+  function showTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg system';
+    wrap.id = 'typingWrap';
+    const ind = document.createElement('div');
+    ind.className = 'typing-indicator';
+    ind.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+    wrap.appendChild(ind);
+    navMessages.appendChild(wrap);
+    navMessages.scrollTop = navMessages.scrollHeight;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typingWrap');
+    if (el) el.remove();
+  }
+
+  async function sendToGemini(userText) {
+    navSend.disabled = true;
+
+    // Add user message to history and UI
+    navHistory.push({ role: 'user', parts: [{ text: userText }] });
+    appendNavMessage('user', userText);
+    showTyping();
+
+    try {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${CONFIG.geminiModel}:generateContent?key=${CONFIG.geminiKey}`;
+
+      const body = {
+        system_instruction: { parts: [{ text: NAV_SYSTEM_PROMPT }] },
+        contents: navHistory,
+        generationConfig: { maxOutputTokens: 256, temperature: 0.7 }
+      };
+
+      const res  = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      removeTyping();
+
+      if (!res.ok) {
+        appendNavMessage('system', 'Signal disrupted. Try again.');
+        navSend.disabled = false;
+        return;
+      }
+
+      const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+
+      // Parse optional node JSON from response
+      let nodeData = null;
+      const jsonMatch = raw.match(/\{"node":\s*"([^"]+)"[^}]*"label":\s*"([^"]+)"[^}]*"url":\s*"([^"]+)"\}/);
+      if (jsonMatch) {
+        nodeData = { node: jsonMatch[1], label: jsonMatch[2], url: jsonMatch[3] };
+        fireEvent('NAVIGATOR_RECOMMENDATION', { node: nodeData.node });
+      }
+
+      // Strip the JSON block from displayed text
+      const displayText = raw.replace(/\{[^}]*"node"[^}]*\}/g, '').trim();
+
+      // Add assistant turn to history (raw, with JSON intact for context)
+      navHistory.push({ role: 'model', parts: [{ text: raw }] });
+
+      appendNavMessage('system', displayText, nodeData);
+
+    } catch (err) {
+      removeTyping();
+      appendNavMessage('system', 'Connection lost. Retry.');
+    }
+
+    navSend.disabled = false;
+    navInput.focus();
+  }
+
+  function handleNavSend() {
+    const text = navInput.value.trim();
+    if (!text) return;
+    navInput.value = '';
+    sendToGemini(text);
+  }
+
+  navSend.addEventListener('click', handleNavSend);
+  navInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') handleNavSend();
+  });
+
+  // ── Trigger navigator after successful lead capture ──
+  // Navigator opens automatically 3.5s after code is revealed (wired in submit flow above)
+
+  /* ── COLLECTIVE EXPAND ───────────────────────────── */
+  const collectiveCard   = document.getElementById('collectiveCard');
+  const collectiveToggle = document.getElementById('collectiveToggle');
+  const collectiveBrands = document.getElementById('collectiveBrands');
+
+  function toggleCollective(e) {
+    e.stopPropagation();
+    const expanded = collectiveCard.classList.toggle('expanded');
+    fireEvent('COLLECTIVE_' + (expanded ? 'EXPAND' : 'COLLAPSE'), {});
+  }
+
+  // Toggle fires from either the + button or the summary area
+  collectiveToggle.addEventListener('click', toggleCollective);
+  collectiveCard.addEventListener('click', function(e) {
+    // Don't intercept clicks on brand tiles themselves
+    if (e.target.closest('.brand-tile')) return;
+    toggleCollective(e);
+  });
+
+  // Track brand tile clicks
+  document.querySelectorAll('.brand-tile').forEach(tile => {
+    tile.addEventListener('click', function(e) {
+      e.stopPropagation();
+      fireEvent('BRAND_CLICK', { brand: this.dataset.brand, url: this.href });
+    });
+  });
+
+  /* ── SUBSTACK NEW POST NOTIFIER ─────────────────── */
+  (function initSubstackPoller() {
+    const FEED_URL    = 'https://mtiradio.substack.com/feed';
+    const PROXY       = 'https://api.rss2json.com/v1/api.json?rss_url=';
+    const POLL_MS     = 5 * 60 * 1000; // check every 5 minutes
+    const STORE_KEY   = 'mti_last_post';
+    const DISMISS_KEY = 'mti_sub_dismissed';
+
+    const alertEl    = document.getElementById('substackAlert');
+    const titleEl    = document.getElementById('substackAlertTitle');
+    const metaEl     = document.getElementById('substackAlertMeta');
+    const linkEl     = document.getElementById('substackAlertLink');
+    const closeBtn   = document.getElementById('substackAlertClose');
+
+    let alertVisible = false;
+    let dismissTimer = null;
+
+    function showAlert(post) {
+      if (alertVisible) return;
+
+      // Format date
+      const date = post.pubDate
+        ? new Date(post.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toUpperCase()
+        : '';
+
+      titleEl.textContent = post.title || 'NEW POST';
+      metaEl.textContent  = `MTI RADIO — ${date}`;
+      linkEl.href         = post.link || 'https://mtiradio.substack.com';
+
+      alertEl.classList.add('show');
+      alertVisible = true;
+
+      fireEvent('SUBSTACK_ALERT_SHOWN', { title: post.title, url: post.link });
+
+      // Auto-dismiss after 12 seconds
+      dismissTimer = setTimeout(hideAlert, 12000);
+    }
+
+    function hideAlert() {
+      alertEl.classList.remove('show');
+      alertVisible = false;
+      if (dismissTimer) clearTimeout(dismissTimer);
+    }
+
+    closeBtn.addEventListener('click', () => {
+      hideAlert();
+      // Suppress for this session after manual close
+      sessionStorage.setItem(DISMISS_KEY, '1');
+      fireEvent('SUBSTACK_ALERT_DISMISSED', {});
+    });
+
+    linkEl.addEventListener('click', () => {
+      fireEvent('SUBSTACK_ALERT_CLICK', { url: linkEl.href });
+      hideAlert();
+    });
+
+    async function checkFeed() {
+      // Don't show if user dismissed this session
+      if (sessionStorage.getItem(DISMISS_KEY) === '1') return;
+
+      try {
+        const res  = await fetch(`${PROXY}${encodeURIComponent(FEED_URL)}`);
+        const data = await res.json();
+
+        if (!data.items || !data.items.length) return;
+
+        const latest    = data.items[0];
+        const latestId  = latest.guid || latest.link;
+        const lastSeen  = localStorage.getItem(STORE_KEY);
+
+        if (lastSeen !== latestId) {
+          // New post detected — store it and show alert
+          localStorage.setItem(STORE_KEY, latestId);
+
+          // Don't alert on the very first load (no previous baseline)
+          if (lastSeen !== null) {
+            showAlert(latest);
+          }
+        }
+      } catch (err) {
+        // Silent fail — feed check non-critical
+      }
+    }
+
+    // Initial check on page load (after 4s delay — let page settle first)
+    setTimeout(checkFeed, 4000);
+
+    // Poll every 5 minutes
+    setInterval(checkFeed, POLL_MS);
+
+  })();
+
+})();
+</script>
+</body>
 </html>
