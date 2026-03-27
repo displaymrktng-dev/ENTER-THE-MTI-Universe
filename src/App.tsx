@@ -1,395 +1,479 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Youtube, Facebook, Instagram, BookOpen, X, Play, Mail, ExternalLink } from 'lucide-react';
+import { NODES, NodeData, PlanetLink } from './constants';
+import { WeatherCanvas } from './components/WeatherCanvas';
 
-import React, { useState, useRef, useEffect, memo, Suspense, lazy } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { 
-  ChevronRight, 
-  ChevronLeft, 
-  Share2, 
-  Info, 
-  Gamepad2, 
-  Battery, 
-  Wifi, 
-  Signal,
-  Volume2,
-  Maximize2,
-  ExternalLink
-} from 'lucide-react';
-import { BRANDS, BrandNode } from './constants';
+const CRMModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-const DynamicBackground = lazy(() => import('./components/DynamicBackground').then(module => ({ default: module.DynamicBackground })));
-
-const GameboyNode = memo(({ brand, isSelected, onClick }: { brand: BrandNode, isSelected: boolean, onClick: () => void }) => {
-  
-  // Facilitate seamless keyboard navigation to ensure maximum accessibility
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onClick();
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) setSubmitted(true);
   };
 
   return (
-    <motion.div
-      layoutId={`node-${brand.id}`}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
-      className={`relative flex-shrink-0 w-64 h-80 rounded-2xl cursor-pointer transition-[transform,box-shadow] duration-500 overflow-hidden focus:outline-none focus:ring-4 focus:ring-white/40 ${
-        isSelected ? 'ring-4 ring-white/20 scale-105' : 'hover:scale-105'
-      }`}
-      style={{ backgroundColor: brand.color }}
-    >
-      {/* Gameboy Device Aesthetic */}
-      <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-      
-      {/* Screen Area */}
-      <div 
-        className="absolute top-6 left-6 right-6 bottom-24 rounded-sm border-4 border-[#306230]/30 flex flex-col items-center justify-center p-4 overflow-hidden shadow-inner bg-cover bg-center group"
-        style={{ 
-          backgroundColor: brand.color,
-          backgroundImage: brand.imageUrl ? `url(${brand.imageUrl})` : 'none'
-        }}
-      >
-        {/* Dark overlay to ensure the frosted glass pops */}
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-        
-        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none bg-[radial-gradient(circle,transparent_20%,#000_20%,#000_40%,transparent_40%,transparent_60%,#000_60%,#000_80%,transparent_80%)] bg-[length:4px_4px]" />
-        
-        {/* Optimized Animation: Only run when in view */}
-        <motion.div 
-          whileInView={{ y: [0, -2, 0] }}
-          viewport={{ once: false, margin: "0px" }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="relative z-10 flex flex-col items-center text-center bg-white/90 backdrop-blur-md p-5 rounded-2xl border border-white/20 shadow-2xl w-full max-w-[95%] transform group-hover:scale-105 transition-transform duration-500"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
         >
-          <div className="mb-2 text-black">{brand.icon}</div>
-          <div className="text-2xl md:text-3xl leading-none font-display font-black uppercase tracking-tighter text-black">{brand.name}</div>
-          <div className="text-[10px] font-bold uppercase tracking-widest text-black/60 mt-1">{brand.subtitle}</div>
-          
-          {/* Interactive Prompt */}
-          <div className="mt-4 px-4 py-1.5 rounded-full bg-black text-[9px] font-bold uppercase tracking-widest text-white animate-pulse shadow-lg">
-            Tap to Explore
-          </div>
+          <motion.div
+            initial={{ scale: 0.95, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.95, y: 20 }}
+            className="w-full max-w-lg bg-[var(--color-ash)] border border-[var(--color-volt)] p-8 relative"
+          >
+            <button onClick={onClose} className="absolute top-4 right-4 text-[var(--color-mist)] hover:text-[var(--color-white)] transition-colors">
+              <X size={24} />
+            </button>
+            <div className="font-mono text-[0.6rem] tracking-[0.3em] text-[var(--color-volt)] uppercase mb-4">// RESTRICTED CHANNEL OPEN</div>
+            <h2 className="font-display text-5xl leading-none tracking-[0.02em] text-[var(--color-white)] uppercase mb-4">
+              UNLOCK <br/><span className="text-[var(--color-volt)]">THE VAULT</span>
+            </h2>
+            {!submitted ? (
+              <>
+                <p className="font-mono text-[0.7rem] tracking-[0.1em] text-[var(--color-ghost)] leading-[1.6] uppercase mb-8">
+                  First access. Unreleased audio. The full archive. One email. Zero noise.
+                </p>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <input
+                    type="email"
+                    placeholder="ENTER YOUR EMAIL"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full bg-[var(--color-void)] border border-[var(--color-wire)] px-4 py-4 font-mono text-[0.8rem] text-[var(--color-white)] placeholder-[var(--color-dim)] focus:outline-none focus:border-[var(--color-volt)] transition-colors"
+                  />
+                  <button type="submit" className="w-full bg-[var(--color-volt)] text-[var(--color-void)] font-display text-xl tracking-[0.05em] py-4 hover:bg-[var(--color-white)] transition-colors uppercase">
+                    Send Me The Code
+                  </button>
+                </form>
+                <p className="font-mono text-[0.5rem] tracking-[0.1em] text-[var(--color-dim)] uppercase mt-4 text-center">
+                  No spam. No noise. Unsubscribe any time.
+                </p>
+              </>
+            ) : (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col gap-6">
+                <div className="bg-[var(--color-void)] border border-[var(--color-wire)] p-6 text-center">
+                  <div className="font-mono text-[0.6rem] tracking-[0.2em] text-[var(--color-mist)] uppercase mb-2">YOUR VAULT ACCESS CODE</div>
+                  <div className="font-mono text-2xl tracking-[0.2em] text-[var(--color-volt)]">MTI-VLT-8X9</div>
+                </div>
+                <p className="font-mono text-[0.65rem] tracking-[0.1em] text-[var(--color-ghost)] leading-[1.6] uppercase text-center">
+                  CHECK YOUR EMAIL FOR FULL INSTRUCTIONS.
+                </p>
+                <a
+                  href="https://mtiradio.substack.com/s/the-vault"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-[var(--color-white)] text-[var(--color-void)] font-display text-xl tracking-[0.05em] py-4 hover:bg-[var(--color-volt)] transition-colors uppercase text-center block"
+                  onClick={onClose}
+                >
+                  Enter The Vault Now
+                </a>
+              </motion.div>
+            )}
+          </motion.div>
         </motion.div>
-      </div>
-
-      {/* Controls Area */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-white/10 backdrop-blur-md flex items-center justify-between px-6">
-        <div className="flex flex-col gap-1">
-          <div className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center">
-            <div className="w-4 h-4 rounded-full bg-black/40" />
-          </div>
-          <div className="text-[8px] uppercase tracking-widest opacity-50 font-bold">Action</div>
-        </div>
-        <div className="flex gap-2">
-          <div className="w-6 h-2 rounded-full bg-black/20 rotate-[-25deg]" />
-          <div className="w-6 h-2 rounded-full bg-black/20 rotate-[-25deg]" />
-        </div>
-      </div>
-    </motion.div>
+      )}
+    </AnimatePresence>
   );
-});
+};
 
-GameboyNode.displayName = 'GameboyNode';
+const getPlatformIcon = (platform: string) => {
+  switch (platform) {
+    case 'YT': return <Youtube size={12} />;
+    case 'FB': return <Facebook size={12} />;
+    case 'IG': return <Instagram size={12} />;
+    case 'SS': return <BookOpen size={12} />;
+    case 'EMAIL': return <Mail size={12} />;
+    default: return <ExternalLink size={12} />;
+  }
+};
+
+// Planet panel — the expanded "world" for each node
+const PlanetPanel = ({ node }: { node: NodeData }) => {
+  const p = node.planet;
+  if (!p) return null;
+
+  return (
+    <div className="planet-panel">
+      <div className="h-[1px] bg-[var(--color-wire)] my-4" />
+
+      {p.sectionLabel && (
+        <p className="font-mono text-[0.5rem] tracking-[0.3em] text-[var(--color-volt)] uppercase mb-4">{p.sectionLabel}</p>
+      )}
+
+      {/* Bio */}
+      <p className="font-mono text-[0.58rem] tracking-[0.08em] text-[var(--color-ghost)] leading-[1.8] uppercase mb-5">
+        {p.bio}
+      </p>
+
+      {/* Links */}
+      {p.links && p.links.length > 0 && (
+        <div className="flex flex-col gap-[1px] bg-[var(--color-wire)] mb-4">
+          {p.links.map((link: PlanetLink, i: number) => (
+            <a
+              key={i}
+              href={link.url}
+              target={link.url.startsWith('mailto') ? '_self' : '_blank'}
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="planet-link group"
+            >
+              <span className="flex items-center gap-2 text-[var(--color-mist)]">
+                <span className="text-[var(--color-volt)]">{getPlatformIcon(link.platform || '')}</span>
+                <span className="font-mono text-[0.45rem] tracking-[0.2em] uppercase">{link.platform}</span>
+              </span>
+              <span className="font-mono text-[0.58rem] tracking-[0.1em] text-[var(--color-white)] uppercase group-hover:text-[var(--color-volt)] transition-colors flex-1">
+                {link.label}
+              </span>
+              <span className="font-mono text-[0.7rem] text-[var(--color-volt)] opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* Media embed */}
+      {p.mediaEmbed && (
+        <div className="mb-4">
+          <p className="font-mono text-[0.45rem] tracking-[0.25em] text-[var(--color-mist)] uppercase mb-2">{p.mediaEmbed.label}</p>
+          <div className="relative w-full bg-[var(--color-void)] border border-[var(--color-wire)] overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              src={p.mediaEmbed.url}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title={p.mediaEmbed.label}
+              onClick={(e) => e.stopPropagation()}
+            />
+            {/* Placeholder overlay when URL is placeholder */}
+            {p.mediaEmbed.url.includes('placeholder') && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--color-void)] border border-[var(--color-wire)]">
+                <Play size={24} className="text-[var(--color-volt)] mb-2 opacity-40" />
+                <span className="font-mono text-[0.45rem] tracking-[0.2em] text-[var(--color-dim)] uppercase">EMBED URL PENDING</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Contact */}
+      {p.contact && (
+        <a
+          href={p.contact.url || '#'}
+          target={p.contact.url?.startsWith('mailto') ? '_self' : '_blank'}
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="planet-contact group"
+        >
+          <div>
+            <div className="font-mono text-[0.45rem] tracking-[0.2em] text-[var(--color-dim)] uppercase mb-1">{p.contact.label}</div>
+            <div className="font-mono text-[0.6rem] tracking-[0.1em] text-[var(--color-white)] uppercase group-hover:text-[var(--color-volt)] transition-colors">{p.contact.value}</div>
+          </div>
+          <Mail size={14} className="text-[var(--color-volt)] opacity-50 group-hover:opacity-100 transition-opacity" />
+        </a>
+      )}
+    </div>
+  );
+};
+
+// Animated sphere SVG for the Collective node
+const CollectiveSphere = () => (
+  <div className="collective-sphere-wrap" aria-hidden="true">
+    <svg className="collective-sphere" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sphereGrad" cx="38%" cy="35%" r="60%">
+          <stop offset="0%" stopColor="#2a2a00" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#111100" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#000000" stopOpacity="0.95" />
+        </radialGradient>
+        <radialGradient id="sphereShine" cx="30%" cy="28%" r="45%">
+          <stop offset="0%" stopColor="#d4ff00" stopOpacity="0.12" />
+          <stop offset="100%" stopColor="#d4ff00" stopOpacity="0" />
+        </radialGradient>
+        <clipPath id="sphereClip">
+          <circle cx="100" cy="100" r="90" />
+        </clipPath>
+      </defs>
+      {/* Base sphere */}
+      <circle cx="100" cy="100" r="90" fill="url(#sphereGrad)" />
+      {/* Latitude lines */}
+      {[30, 55, 80, 105, 130, 155, 170].map((y, i) => {
+        const dy = y - 100;
+        const rx = Math.sqrt(Math.max(0, 90 * 90 - dy * dy));
+        return rx > 2 ? (
+          <ellipse key={i} cx="100" cy={y} rx={rx} ry={rx * 0.28}
+            fill="none" stroke="#d4ff00" strokeWidth="0.4" strokeOpacity="0.18"
+            clipPath="url(#sphereClip)" />
+        ) : null;
+      })}
+      {/* Longitude lines */}
+      {[0, 30, 60, 90, 120, 150].map((angle, i) => (
+        <ellipse key={i} cx="100" cy="100" rx={90 * Math.abs(Math.cos(angle * Math.PI / 180))} ry="90"
+          fill="none" stroke="#d4ff00" strokeWidth="0.4" strokeOpacity="0.15"
+          clipPath="url(#sphereClip)"
+          transform={`rotate(${angle}, 100, 100)`} />
+      ))}
+      {/* Orbital ring */}
+      <ellipse cx="100" cy="100" rx="110" ry="22"
+        fill="none" stroke="#d4ff00" strokeWidth="0.8" strokeOpacity="0.3"
+        strokeDasharray="4 6"
+        transform="rotate(-18, 100, 100)" />
+      {/* Shine overlay */}
+      <circle cx="100" cy="100" r="90" fill="url(#sphereShine)" />
+      {/* Rim glow */}
+      <circle cx="100" cy="100" r="90" fill="none" stroke="#d4ff00" strokeWidth="1" strokeOpacity="0.25" />
+      {/* Node dots on the sphere surface */}
+      <circle cx="68" cy="72" r="2.5" fill="#d4ff00" opacity="0.7" />
+      <circle cx="130" cy="88" r="2" fill="#00d4ff" opacity="0.6" />
+      <circle cx="95" cy="130" r="2" fill="#d4ff00" opacity="0.5" />
+      <circle cx="148" cy="118" r="1.5" fill="#ffc800" opacity="0.6" />
+      <circle cx="55" cy="115" r="1.5" fill="#00d4ff" opacity="0.5" />
+      {/* Connection lines between nodes */}
+      <line x1="68" y1="72" x2="130" y2="88" stroke="#d4ff00" strokeWidth="0.4" strokeOpacity="0.2" clipPath="url(#sphereClip)" />
+      <line x1="130" y1="88" x2="148" y2="118" stroke="#d4ff00" strokeWidth="0.4" strokeOpacity="0.2" clipPath="url(#sphereClip)" />
+      <line x1="55" y1="115" x2="95" y2="130" stroke="#00d4ff" strokeWidth="0.4" strokeOpacity="0.2" clipPath="url(#sphereClip)" />
+    </svg>
+  </div>
+);
+
+// Collective sub-brands panel
+const CollectivePanel = ({ node }: { node: NodeData }) => (
+  <div className="mt-4">
+    <div className="h-[1px] bg-[var(--color-wire)] my-4" />
+    <p className="font-mono text-[0.5rem] tracking-[0.3em] text-[var(--color-mist)] uppercase mb-3">// NETWORK BRANDS</p>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-[1px] bg-[var(--color-wire)]">
+      {node.subBrands?.map((brand) => (
+        <a
+          key={brand.id}
+          href={brand.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`brand-tile group ${brand.id === 'tse' ? 'sm:col-span-2 bg-[#110000] hover:bg-[#220000]' : ''}`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex items-center gap-2 mb-[0.2rem]">
+            <span style={{ color: brand.color, opacity: 1 }}>{getPlatformIcon(brand.platform)}</span>
+            <span className="font-mono text-[0.6rem] tracking-[0.25em]" style={{ color: brand.color, opacity: 1 }}>{brand.platform}</span>
+          </div>
+          <div className={`font-display tracking-[0.06em] text-[var(--color-white)] uppercase leading-[1.1] group-hover:text-[var(--color-volt)] transition-colors ${brand.id === 'tse' ? 'text-2xl md:text-3xl text-[var(--color-volt)]' : 'text-[1.15rem]'}`}>
+            {brand.name}
+          </div>
+          <div className="font-mono text-[0.62rem] tracking-[0.1em] text-[var(--color-ghost)] leading-[1.6] uppercase mt-1">{brand.description}</div>
+          <div className="brand-arrow font-mono text-[0.8rem] text-[var(--color-volt)] mt-2">↗</div>
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
+const NodeCard = ({ node, onClick }: { node: NodeData, onClick?: (e: React.MouseEvent) => void }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsExpanded(!isExpanded);
+  };
+
+  if (node.isExpandable) {
+    return (
+      <div
+        className={`mti-card ${isExpanded ? 'after:!bg-[var(--color-volt)]' : ''} ${node.isCollective ? 'collective' : ''}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        {node.isCollective && <CollectiveSphere />}
+        <div className="flex items-center justify-between mb-auto">
+          <span className="font-mono text-[0.55rem] text-[var(--color-dim)] tracking-[0.2em]">{node.index} / {node.category}</span>
+          <div
+            className={`w-6 h-6 border flex items-center justify-center cursor-crosshair transition-colors ${isExpanded ? 'border-[var(--color-volt)] bg-[var(--color-volt)]' : 'border-[var(--color-wire)]'}`}
+            onClick={handleToggle}
+          >
+            <span className={`font-mono text-[0.85rem] leading-none transition-all duration-300 ${isExpanded ? 'text-[var(--color-void)] rotate-45' : 'text-[var(--color-mist)]'}`}>+</span>
+          </div>
+        </div>
+
+        <div className={`transition-opacity duration-200 ${isExpanded ? 'opacity-0 h-0 overflow-hidden' : 'opacity-100'}`}>
+          <div className="font-display text-[clamp(1.4rem,2.5vw,2.2rem)] leading-none tracking-[0.04em] text-[var(--color-white)] uppercase mt-8 transition-colors group-hover:text-[var(--color-volt)]">
+            {node.title}
+          </div>
+          <div className="font-mono text-[0.6rem] text-[var(--color-mist)] tracking-[0.12em] leading-[1.7] uppercase mt-2">
+            {node.description}
+          </div>
+          <div className="card-arrow text-[0.9rem] mt-5 text-[var(--color-volt)] font-mono">
+            {node.action}
+          </div>
+        </div>
+
+        <div className={`overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isExpanded ? 'max-h-[1200px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+          {node.planet ? (
+            <PlanetPanel node={node} />
+          ) : node.subBrands ? (
+            <CollectivePanel node={node} />
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <a
+      href={node.url}
+      target={node.url.startsWith('http') ? '_blank' : '_self'}
+      rel={node.url.startsWith('http') ? 'noopener noreferrer' : ''}
+      className={`mti-card group ${node.isVault ? 'vault' : ''}`}
+      onClick={onClick}
+    >
+      <div>
+        <span className={`font-mono text-[0.55rem] tracking-[0.2em] ${node.isVault ? 'text-[var(--color-mist)]' : 'text-[var(--color-dim)]'}`}>
+          {node.index} / {node.category}
+        </span>
+        {node.isVault && (
+          <div className="inline-block bg-[var(--color-volt)] text-[var(--color-void)] font-mono text-[0.5rem] tracking-[0.2em] px-2 py-1 uppercase font-bold mt-2 ml-2">
+            ◈ RESTRICTED ACCESS
+          </div>
+        )}
+      </div>
+      <div>
+        <div className={`font-display text-[clamp(1.4rem,2.5vw,2.2rem)] leading-none tracking-[0.04em] uppercase mt-8 transition-colors ${node.isVault ? 'text-[var(--color-volt)]' : 'text-[var(--color-white)] group-hover:text-[var(--color-volt)]'}`}>
+          {node.title}
+        </div>
+        <div className="font-mono text-[0.6rem] text-[var(--color-mist)] tracking-[0.12em] leading-[1.7] uppercase mt-2">
+          {node.description}
+        </div>
+        <div className="card-arrow text-[0.9rem] mt-5 text-[var(--color-volt)] font-mono">
+          {node.action}
+        </div>
+      </div>
+    </a>
+  );
+};
+
+const UniverseLogo = () => (
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-3 flex-shrink-0">
+    <circle cx="12" cy="12" r="3" fill="#00d4ff" className="animate-pulse" />
+    <circle cx="12" cy="12" r="5" fill="rgba(0, 212, 255, 0.3)" className="animate-ping" />
+    <circle cx="12" cy="12" r="8" stroke="#d4ff00" strokeWidth="1" strokeDasharray="2 4" className="animate-[spin_4s_linear_infinite]" />
+    <circle cx="12" cy="12" r="11" stroke="#ffc800" strokeWidth="0.5" strokeDasharray="4 4" className="animate-[spin_6s_linear_infinite_reverse]" />
+    <circle cx="12" cy="4" r="1.5" fill="#d4ff00" />
+    <circle cx="20" cy="12" r="1.5" fill="#00d4ff" />
+    <circle cx="4" cy="12" r="1.5" fill="#ffc800" />
+  </svg>
+);
 
 export default function App() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const selectedBrand = BRANDS.find(b => b.id === selectedId);
+  const [sessionId, setSessionId] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  useEffect(() => {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let id = 'MTI-';
+    for (let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)];
+    setSessionId(id);
+  }, []);
 
-  const showToast = (message: string) => {
-    setToastMessage(message);
-    setTimeout(() => setToastMessage(null), 3000);
-  };
-
-  const handleShare = async () => {
-    const shareData = {
-      title: 'ENTER THE MTI UNIVERSE',
-      text: 'Explore the future of culture, music, and digital innovation in the MTI Universe.',
-      url: window.location.href, // Dynamically use the current URL (important for when deployed to a custom domain)
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      // Fallback: Copy to clipboard
-      try {
-        await navigator.clipboard.writeText(shareData.url);
-        showToast('Link copied to clipboard!');
-      } catch (err) {
-        console.error('Failed to copy:', err);
-        showToast('Failed to copy link.');
-      }
+  const handleNodeClick = (e: React.MouseEvent, node: NodeData) => {
+    if (node.isVault) {
+      e.preventDefault();
+      setIsModalOpen(true);
     }
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#050505] font-sans selection:bg-white selection:text-black">
-      <Suspense fallback={null}>
-        <DynamicBackground />
-      </Suspense>
+    <div className="min-h-screen flex flex-col relative z-10">
+      <WeatherCanvas />
+      <CRMModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-      {/* Status Bar (Google Efficiency) */}
-      <header className="fixed top-0 left-0 right-0 h-14 px-6 flex items-center justify-between z-50 glass-panel border-none bg-transparent">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <motion.div 
-              animate={{ opacity: [1, 0.4, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]"
-            />
-            <span className="text-[10px] font-bold tracking-[0.2em] text-emerald-500 uppercase">Live</span>
-          </div>
-          <a href="https://instagram.com/displayMRKTNG" target="_blank" rel="noopener noreferrer" className="text-sm font-bold tracking-tighter uppercase hover:text-white/80 transition-colors">displayMRKTNG</a>
-          <div className="h-4 w-[1px] bg-white/20" />
-          <div className="text-[10px] font-mono opacity-50 uppercase tracking-widest">MTI Universe</div>
-        </div>
-        
-        <div className="flex items-center gap-4 text-white/60">
-          <div className="flex items-center gap-1">
-            <Signal size={12} />
-            <Wifi size={12} />
-            <Battery size={12} className="rotate-90" />
-          </div>
-          <div className="text-xs font-mono">22:40</div>
+      {/* Header */}
+      <header className="flex items-center justify-between px-6 md:px-10 py-6 border-b border-[var(--color-wire)] relative z-10">
+        <a href="/" className="flex items-center font-display text-lg tracking-[0.3em] text-[var(--color-volt)] uppercase decoration-none cursor-crosshair">
+          <UniverseLogo />
+          MTI UNIVERSE
+        </a>
+        <div className="flex items-center gap-6">
+          <span className="font-mono text-[0.6rem] tracking-[0.2em] text-[var(--color-mist)] uppercase hidden sm:inline-block">
+            displayMRKTNG
+          </span>
+          <span className="font-mono text-[0.5rem] text-[var(--color-ember)] tracking-[0.2em] border border-[var(--color-ember)] px-2 py-0.5 opacity-40">
+            VAR:B
+          </span>
         </div>
       </header>
 
-      <main className="relative pt-24 pb-12 px-6 md:px-12 max-w-[1800px] mx-auto">
-        {/* Hero Section (Kanye Minimalism) */}
-        <div className="mb-12">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-display font-bold tracking-tighter leading-[0.85] uppercase mb-4"
-          >
-            Enter the<br />MTI Universe
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
-            transition={{ delay: 0.2 }}
-            className="text-sm md:text-base max-w-xl font-medium tracking-tight"
-          >
-            A media brand ecosystem housing the future of culture, music, and digital innovation. 
-            Transform your device into our world.
-          </motion.p>
-        </div>
+      {/* Hero */}
+      <section className="px-6 md:px-10 pt-14 pb-8 relative overflow-hidden z-10">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="font-mono text-[0.6rem] tracking-[0.4em] text-[var(--color-ember)] uppercase mb-3"
+        >
+          // TRANSMISSION ACTIVE — SELECT YOUR NODE
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="font-display text-[clamp(3.5rem,10vw,8rem)] leading-[0.9] tracking-[0.02em] text-[var(--color-white)] uppercase"
+        >
+          ENTER<span className="text-[var(--color-volt)] block">THE MTI</span>UNIVERSE
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="font-mono text-[0.7rem] tracking-[0.2em] text-[var(--color-ghost)] mt-5 max-w-[480px] leading-[1.8] uppercase"
+        >
+          Nine nodes. One vault. The architecture is not neutral — the path forward is already encoded. Navigate with intent.
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="font-mono text-[0.55rem] text-[var(--color-dim)] tracking-[0.15em] mt-4 uppercase"
+        >
+          SESSION — {sessionId}
+        </motion.p>
+      </section>
 
-        {/* Vertical Arcade Style Menu */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 pb-24">
-          {BRANDS.map((brand) => (
-            <div key={brand.id} className="flex justify-center">
-              <GameboyNode 
-                brand={brand} 
-                isSelected={selectedId === brand.id}
-                onClick={() => setSelectedId(brand.id)}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* Brand Details Overlay (Apple Arcade Style) */}
-        <AnimatePresence>
-          {selectedId && selectedBrand && (
+      {/* Grid */}
+      <section className="px-6 md:px-10 py-8 pb-16 flex-grow relative z-10">
+        <div className="grid-a">
+          {NODES.map((node, i) => (
             <motion.div
+              key={node.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-black/80 backdrop-blur-2xl"
-              onClick={() => setSelectedId(null)}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
+              className={node.isVault ? 'row-span-2' : ''}
+              style={node.isVault ? { gridRow: '1 / 3' } : {}}
             >
-              <motion.div
-                layoutId={`node-${selectedBrand.id}`}
-                className="relative w-full max-w-4xl bg-[#111] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="grid md:grid-cols-2 h-full">
-                  {/* Visual Side */}
-                  <div 
-                    className="relative h-64 md:h-auto flex flex-col items-center justify-center p-12 bg-cover bg-center"
-                    style={{ 
-                      backgroundColor: selectedBrand.color,
-                      backgroundImage: selectedBrand.imageUrl ? `linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), url(${selectedBrand.imageUrl})` : 'none'
-                    }}
-                  >
-                    <div className="absolute top-6 left-6 text-[10px] font-bold uppercase tracking-widest text-white/40">
-                      SYSTEM_ACTIVE // {selectedBrand.category}
-                    </div>
-                    
-                    <motion.div 
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="bg-[#8bac0f] p-8 rounded-xl border-8 border-[#306230]/30 shadow-2xl"
-                    >
-                      <div className="text-[#0f380f] scale-[2]">
-                        {selectedBrand.icon}
-                      </div>
-                    </motion.div>
-
-                    <div className="mt-12 text-center text-white">
-                      <h2 className="text-4xl font-display font-bold uppercase tracking-tighter">{selectedBrand.name}</h2>
-                      <p className="text-white/60 uppercase tracking-widest text-xs mt-2">{selectedBrand.subtitle}</p>
-                    </div>
-                  </div>
-
-                  {/* Content Side */}
-                  <div className="p-8 md:p-12 flex flex-col justify-between bg-zinc-900">
-                    <div>
-                      <div className="flex items-center gap-2 mb-6">
-                        <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-wider text-white/60">
-                          {selectedBrand.category}
-                        </span>
-                        <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-wider text-white/60">
-                          Verified Brand
-                        </span>
-                      </div>
-                      
-                      <h3 className="text-2xl font-display font-medium mb-4">About the Innovator</h3>
-                      <p className="text-white/60 leading-relaxed mb-8">
-                        {selectedBrand.description}
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-4 mb-8">
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                          <div className="text-[10px] uppercase text-white/40 mb-1">Retention</div>
-                          <div className="text-xl font-mono">98.4%</div>
-                        </div>
-                        <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                          <div className="text-[10px] uppercase text-white/40 mb-1">Status</div>
-                          <div className="text-xl font-mono text-emerald-500">LIVE</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col gap-3">
-                      {selectedBrand.link ? (
-                        <a 
-                          href={selectedBrand.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full py-4 rounded-2xl bg-white text-black font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2"
-                        >
-                          Enter Experience <ExternalLink size={18} />
-                        </a>
-                      ) : (
-                        <button className="w-full py-4 rounded-2xl bg-white text-black font-bold uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 opacity-50 cursor-not-allowed">
-                          Coming Soon <ChevronRight size={18} />
-                        </button>
-                      )}
-                      
-                      {selectedBrand.secondaryLinks && (
-                        <div className="flex gap-3">
-                          {selectedBrand.secondaryLinks.map((sl, idx) => (
-                            <a 
-                              key={idx}
-                              href={sl.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 py-3 rounded-2xl bg-white/10 border border-white/20 text-[10px] font-bold uppercase tracking-widest hover:bg-white/20 transition-colors flex items-center justify-center gap-2"
-                            >
-                              {sl.name} <ExternalLink size={14} />
-                            </a>
-                          ))}
-                        </div>
-                      )}
-
-                      <div className="flex gap-3 mt-2">
-                        <button 
-                          onClick={handleShare}
-                          className="flex-1 py-4 rounded-2xl bg-white/5 border border-white/10 font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                        >
-                          <Share2 size={18} /> Share
-                        </button>
-                        <button 
-                          onClick={() => setSelectedId(null)}
-                          className="flex-1 py-4 rounded-2xl bg-white/5 border border-white/10 font-bold uppercase tracking-widest hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+              <NodeCard node={node} onClick={(e) => handleNodeClick(e, node)} />
             </motion.div>
-          )}
-        </AnimatePresence>
-      </main>
-
-      {/* Footer Navigation (Google Efficiency) */}
-      <footer className="fixed bottom-0 left-0 right-0 h-20 px-6 md:px-12 flex items-center justify-between z-40 glass-panel border-none">
-        <div className="flex items-center gap-8">
-          <button className="flex flex-col items-center gap-1 group">
-            <div className="p-2 rounded-xl bg-white text-black group-hover:scale-110 transition-transform">
-              <Gamepad2 size={20} />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Universe</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 group opacity-40 hover:opacity-100 transition-opacity">
-            <div className="p-2 rounded-xl">
-              <Volume2 size={20} />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Audio</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 group opacity-40 hover:opacity-100 transition-opacity">
-            <div className="p-2 rounded-xl">
-              <Maximize2 size={20} />
-            </div>
-            <span className="text-[10px] font-bold uppercase tracking-widest">Full</span>
-          </button>
+          ))}
         </div>
+      </section>
 
-        <div className="hidden md:flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-          <span>Privacy</span>
-          <span>Terms</span>
-          <span>© 2026 displayMRKTNG</span>
-        </div>
-
-        <button 
-          onClick={handleShare}
-          className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-        >
-          <Share2 size={20} />
-        </button>
-      </footer>
-
-      {/* Global Audio Visualizer (Subtle) */}
-      <div className="fixed bottom-24 left-6 flex items-end gap-1 h-12 pointer-events-none opacity-20">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            animate={{ height: [4, Math.random() * 40 + 8, 4] }}
-            transition={{ duration: 0.5 + Math.random(), repeat: Infinity }}
-            className="w-1 bg-white rounded-full"
+      {/* Footer */}
+      <footer className="border-t border-[var(--color-wire)] px-6 md:px-10 py-6 flex justify-between items-center relative z-10">
+        <span className="font-mono text-[0.55rem] text-[var(--color-dim)] tracking-[0.15em] uppercase">
+          © MTI UNIVERSE — DISPLAYMRKTNG — ALL TRANSMISSIONS MONITORED
+        </span>
+        <span className="font-mono text-[0.55rem] text-[var(--color-volt)] tracking-[0.15em] uppercase flex items-center gap-2">
+          <motion.span
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1.5 h-1.5 bg-[var(--color-volt)] rounded-full"
           />
-        ))}
-      </div>
-
-      {/* Toast Notification */}
-      <AnimatePresence>
-        {toastMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[200] px-6 py-3 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full shadow-2xl"
-          >
-            {toastMessage}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          LIVE
+        </span>
+      </footer>
     </div>
   );
 }
+
