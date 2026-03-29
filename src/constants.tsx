@@ -67,7 +67,7 @@ export const NODES: NodeData[] = [
     isExpandable: true,
     isCollective: true,
     subBrands: [
-      { id: 'tse', platform: 'YT', name: 'TSE Top Shelf Ent.', description: 'The gold standard of the region. Premium entertainment.', url: 'https://www.youtube.com/@tsetopshelfentertainment2648', color: '#ff0000' },
+      { id: 'tse', platform: 'YT', name: 'TSE Top Shelf Ent.', description: 'The gold standard of the region. Premium entertainment.', url: 'https://www.instagram.com/topshelfent864', color: '#ff0000' },
       { id: 'coc-podcast', platform: 'YT', name: 'COC PODCAST', description: 'Culture. Opinion. Conversation.', url: 'https://www.youtube.com/@COCPodcast614', color: '#ff0000' },
       { id: 'trak-team', platform: 'FB', name: 'TRAK TEAM DJs', description: 'The selectors. The sound.', url: 'https://www.facebook.com/profile.php?id=61576360502116', color: '#1877f2' },
       { id: 'marlanda-dekine', platform: 'SS', name: 'MARLANDA DEKINE', description: 'Words. Soul. Dispatch.', url: 'https://substack.com/@dekinesoul?utm_source=global-search', color: '#ff6719' },
@@ -98,7 +98,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'DIRECT LINE',
         value: 'BOOKINGS & INQUIRIES',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   },
@@ -115,8 +115,8 @@ export const NODES: NodeData[] = [
       sectionLabel: '// VISUAL ARCHIVE',
       bio: 'Akata Visions is the visual arm of the MTI Universe — directing, filming, and architecting the moving image identity of the collective. Every frame is intentional.',
       links: [
-        { label: 'YOUTUBE CHANNEL', url: '#', platform: 'YT' },
-        { label: 'INSTAGRAM', url: '#', platform: 'IG' },
+        { label: 'YOUTUBE CHANNEL', url: 'https://youtube.com/poundageoldinspired', platform: 'YT' },
+        { label: 'INSTAGRAM', url: 'https://instagram.com/avisionproductions', platform: 'IG' },
         { label: 'VIMEO PORTFOLIO', url: '#', platform: 'VM' },
       ],
       mediaEmbed: {
@@ -126,7 +126,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'PRODUCTION INQUIRIES',
         value: 'COMMISSIONS & COLLABS',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   },
@@ -150,7 +150,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'SUBMISSIONS',
         value: 'PITCHES & COLLABS',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   },
@@ -174,7 +174,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'CLIENT INQUIRIES',
         value: 'STRATEGY & BUILD',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   },
@@ -198,7 +198,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'LICENSING',
         value: 'SYNC & USAGE RIGHTS',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   },
@@ -217,7 +217,7 @@ export const NODES: NodeData[] = [
       links: [
         { label: 'EVENT CALENDAR', url: '#', platform: 'CAL' },
         { label: 'INSTAGRAM UPDATES', url: 'https://www.instagram.com/tqstateofmynd/', platform: 'IG' },
-        { label: 'BOOK FOR EVENTS', url: 'mailto:contact@ageold.shop', platform: 'EMAIL' },
+        { label: 'BOOK FOR EVENTS', url: 'mailto:displaymrktng@ageold.shop', platform: 'EMAIL' },
       ],
       contact: {
         label: 'BOOKING',
@@ -246,7 +246,7 @@ export const NODES: NodeData[] = [
       contact: {
         label: 'WHOLESALE & COLLABS',
         value: 'OBJECT PARTNERSHIPS',
-        url: 'mailto:contact@ageold.shop'
+        url: 'mailto:displaymrktng@ageold.shop'
       }
     }
   }
