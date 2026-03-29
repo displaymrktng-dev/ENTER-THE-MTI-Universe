@@ -1,116 +1,174 @@
-import React from 'react';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap');
+@import "tailwindcss";
 
-export interface NodeData {
-  id: string;
-  index: string;
-  category: string;
-  title: string;
-  description: React.ReactNode;
-  action: string;
-  url: string;
-  isVault?: boolean;
-  isExpandable?: boolean;
-  subBrands?: SubBrand[];
+@theme {
+  --font-sans: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --color-void:  #000000;
+  --color-ash:   #111111;
+  --color-smoke: #1a1a1a;
+  --color-wire:  #2a2a2a;
+  --color-dim:   #666666;
+  --color-mist:  #999999;
+  --color-ghost: #bbbbbb;
+  --color-chalk: #e0e0e0;
+  --color-white: #ffffff;
+  --color-volt:  #d4ff00;
+  --color-ember: #ff4d00;
+  --color-ice:   #00d4ff;
 }
 
-export interface SubBrand {
-  id: string;
-  platform: string;
-  name: string;
-  description: string;
-  url: string;
-  color: string;
-}
-
-export const NODES: NodeData[] = [
-  {
-    id: 'the-vault',
-    index: '01',
-    category: 'PRIMARY NODE',
-    title: 'THE VAULT',
-    description: <>Core archive. Unreleased material.<br/>Members only.</>,
-    action: '→ ENTER',
-    url: 'https://mtiradio.substack.com/s/the-vault',
-    isVault: true
-  },
-  {
-    id: 'mti-radio',
-    index: '02',
-    category: 'AUDIO',
-    title: 'MTI RADIO',
-    description: <>Live sessions.<br/>Frequency drops.</>,
-    action: '→ TUNE IN',
-    url: '#'
-  },
-  {
-    id: 'akata-visions',
-    index: '03',
-    category: 'VISUAL',
-    title: 'AKATA VISIONS',
-    description: <>Direction. Film. Identity.<br/>Moving image.</>,
-    action: '→ VIEW',
-    url: '#'
-  },
-  {
-    id: 'substack',
-    index: '04',
-    category: 'EDITORIAL',
-    title: 'SUBSTACK',
-    description: <>Long-form intelligence.<br/>The dispatch.</>,
-    action: '→ READ',
-    url: '#'
-  },
-  {
-    id: 'mrktng-lab',
-    index: '05',
-    category: 'STRATEGY',
-    title: 'MRKTNG LAB',
-    description: <>Infrastructure. Growth.<br/>System architecture.</>,
-    action: '→ BUILD',
-    url: '#'
-  },
-  {
-    id: 'archive',
-    index: '06',
-    category: 'CATALOG',
-    title: 'ARCHIVE',
-    description: <>The full body of work.<br/>Indexed. Permanent.</>,
-    action: '→ EXPLORE',
-    url: '#'
-  },
-  {
-    id: 'live',
-    index: '07',
-    category: 'EVENTS',
-    title: 'LIVE',
-    description: <>Appearances. Shows.<br/>Presence.</>,
-    action: '→ UPCOMING',
-    url: '#'
-  },
-  {
-    id: 'collective',
-    index: '08',
-    category: 'NETWORK',
-    title: 'COLLECTIVE',
-    description: <>The network.<br/>The operators.</>,
-    action: '→ EXPAND',
-    url: '#',
-    isExpandable: true,
-    subBrands: [
-      { id: 'tse', platform: 'YT', name: 'TSE Top Shelf Ent.', description: 'The gold standard of the region. Premium entertainment.', url: 'https://www.youtube.com/@tsetopshelfentertainment2648', color: '#ff0000' },
-      { id: 'coc-podcast', platform: 'YT', name: 'COC PODCAST', description: 'Culture. Opinion. Conversation.', url: 'https://www.youtube.com/@COCPodcast614', color: '#ff0000' },
-      { id: 'trak-team', platform: 'FB', name: 'TRAK TEAM DJs', description: 'The selectors. The sound.', url: 'https://www.facebook.com/profile.php?id=61576360502116', color: '#1877f2' },
-      { id: 'marlanda-dekine', platform: 'SS', name: 'MARLANDA DEKINE', description: 'Words. Soul. Dispatch.', url: 'https://substack.com/@dekinesoul?utm_source=global-search', color: '#ff6719' },
-      { id: 'state-of-mynd', platform: 'IG', name: 'STATE OF MYND', description: 'Frequency. Vision. Identity.', url: 'https://www.instagram.com/tqstateofmynd/', color: '#c13584' }
-    ]
-  },
-  {
-    id: 'shop',
-    index: '09',
-    category: 'OBJECTS',
-    title: 'SHOP',
-    description: <>Physical artifacts.<br/>Limited editions.</>,
-    action: '→ ACQUIRE',
-    url: '#'
+@layer base {
+  body {
+    @apply bg-[var(--color-void)] text-[var(--color-white)] min-h-screen overflow-x-hidden cursor-crosshair;
   }
-];
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+}
+
+/* ── Grid ── */
+.grid-a {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-wire);
+}
+@media (max-width: 768px) { .grid-a { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .grid-a { grid-template-columns: 1fr; } }
+
+/* ── Node card ── */
+.mti-card {
+  background: var(--color-ash);
+  padding: 2rem 1.8rem;
+  cursor: crosshair;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+.mti-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.mti-card:hover { background: var(--color-smoke); }
+.mti-card:hover::after { background: var(--color-volt); }
+
+.mti-card.vault {
+  background: var(--color-smoke);
+  border: 1px solid var(--color-volt);
+}
+.mti-card.vault:hover { background: #0f0f00; }
+
+/* ── Collective card ── */
+.mti-card.collective {
+  background: #0a0a00;
+  border: 1px solid rgba(212,255,0,0.3);
+}
+.mti-card.collective:hover {
+  background: #0d0d00;
+  border-color: rgba(212,255,0,0.55);
+}
+
+/* ── Collective sphere ── */
+.collective-sphere-wrap {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mti-card.collective:hover .collective-sphere-wrap {
+  opacity: 0.8;
+  transform: scale(1.06) rotate(6deg);
+}
+.collective-sphere {
+  width: 100%;
+  height: 100%;
+  animation: sphereSpin 18s linear infinite;
+}
+@keyframes sphereSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Card arrow ── */
+.card-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.mti-card:hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Brand tiles (Collective expanded) ── */
+.brand-tile {
+  background: #0c0c0c;
+  padding: 1rem 0.95rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+  transition: background 0.18s ease;
+  cursor: crosshair;
+  border-bottom: 1px solid #1a1a1a;
+}
+.brand-tile:hover { background: #111100; }
+
+.brand-arrow {
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.brand-tile:hover .brand-arrow { opacity: 1; }
+
+/* ── Planet panel (node expanded content) ── */
+.planet-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--color-void);
+  padding: 0.7rem 0.8rem;
+  text-decoration: none;
+  cursor: crosshair;
+  transition: background 0.15s ease;
+}
+.planet-link:hover { background: #0a0a00; }
+
+.planet-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-void);
+  border: 1px solid var(--color-wire);
+  padding: 0.75rem 0.85rem;
+  text-decoration: none;
+  cursor: crosshair;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.planet-contact:hover {
+  border-color: var(--color-volt);
+  background: #0a0a00;
+}
